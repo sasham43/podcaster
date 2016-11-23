@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+a {
+  color: #f05a66;
+}
+
+.splash-menu {
+  /*color: #fff;*/
+  color: #f05a66;
+  border-top: solid 3px #f05a66;
+  padding-top: 1%;
+  padding-bottom: .5%;
+}
+
+.splash-menu-link {
+  background-color: #fff;
+  color: #f05a66;
+}
+
+.splash-menu-selected .splash-menu-link {
+  color: #f05a66 !important;
+  background-color: #fff !important;
+}
+
+.splash-container {
+    height: 100vh;
+    background-color: #f05a66;
+    z-index: 1;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+.splash {
+  border: solid 3px #fff;
+  border-radius: 5px;
+  margin: 10% 15%;
+  padding: 10% 15%;
+  color: #fff;
+}
+
+a.pure-button-primary {
+  color: #f05a66;
+  background-color: #fff;
+}

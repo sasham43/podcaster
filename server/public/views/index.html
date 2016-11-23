@@ -7,15 +7,44 @@
     <!-- Libraries -->
     <script src="vendor/angular/angular.min.js"></script>
     <link rel="stylesheet" href="vendor/purecss/build/pure-min.css" />
+    <link rel="stylesheet" href="vendor/purecss/build/grids-responsive-min.css" />
+    <!-- <link rel="stylesheet" href="vendor/purecss/build/marketing.css" /> -->
+
+    <!-- <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css"> -->
     <!-- Custom -->
     <script src="scripts/client.js"></script>
+    <link rel="stylesheet" href="stylesheets/main.css" />
   </head>
   <body>
-    <div ng-controller="SplashController">
-      <h1>Podcast Hosting</h1>
-      <p>
-        Some text here.
-      </p>
+    <div class="header">
+      <div class="pure-menu pure-menu-horizontal splash-menu">
+        <a class="pure-menu-heading" href=" ">Podcaster</a>
+        <ul class="pure-menu-list">
+          <li class="pure-menu-item">
+            <a href="#" class="pure-menu-link splash-menu-link splash-menu-selected">Home</a>
+          </li>
+          <li class="pure-menu-item">
+            <a href="#" class="pure-menu-link splash-menu-link">About</a>
+          </li>
+          <li class="pure-menu-item">
+            <a href="#" class="pure-menu-link splash-menu-link">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="splash-container" ng-controller="SplashController">
+      <div class="splash">
+        <h1 class="splash-head">host a podcast for free</h1>
+        <p class="splash-subhead">
+          what are you waiting for?
+        </p>
+        <p>
+          <a href="http://purecss.io" class="pure-button pure-button-primary">go</a>
+        </p>
+      </div>
+
+
     </div>
 
   </body>
