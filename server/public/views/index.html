@@ -6,6 +6,7 @@
 
     <!-- Libraries -->
     <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
     <link rel="stylesheet" href="vendor/purecss/build/pure-min.css" />
     <link rel="stylesheet" href="vendor/purecss/build/grids-responsive-min.css" />
     <!-- <link rel="stylesheet" href="vendor/purecss/build/marketing.css" /> -->
@@ -21,19 +22,20 @@
         <a class="pure-menu-heading" href=" ">Podcaster</a>
         <ul class="pure-menu-list pull-right">
           <li class="pure-menu-item">
-            <a href="#" class="pure-menu-link splash-menu-link splash-menu-selected">Home</a>
+            <a ui-sref="splash" class="pure-menu-link splash-menu-link splash-menu-selected">Home</a>
           </li>
           <li class="pure-menu-item">
-            <a href="#" class="pure-menu-link splash-menu-link">About</a>
+            <a ui-sref="about" class="pure-menu-link splash-menu-link">About</a>
           </li>
           <li class="pure-menu-item">
-            <a href="#" class="pure-menu-link splash-menu-link">Sign Up</a>
+            <a ui-sref="login" class="pure-menu-link splash-menu-link">Login</a>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="splash-container" ng-controller="SplashController">
+    <ui-view></ui-view>
+    <!-- <div class="splash-container" ng-controller="SplashController">
       <div class="splash">
         <h1 class="splash-head">host a podcast for free</h1>
         <p class="splash-subhead">
@@ -45,7 +47,7 @@
       </div>
 
 
-    </div>
+    </div> -->
 
   </body>
 </html>
