@@ -15,6 +15,8 @@
     <!-- Custom -->
     <script src="scripts/client.js"></script>
     <link rel="stylesheet" href="stylesheets/main.css" />
+
+    <!-- <base href="/" /> -->
   </head>
   <body>
     <div class="header">
@@ -22,13 +24,13 @@
         <a class="pure-menu-heading" href=" ">Podcaster</a>
         <ul class="pure-menu-list pull-right">
           <li class="pure-menu-item">
-            <a ui-sref="splash" class="pure-menu-link splash-menu-link splash-menu-selected">Home</a>
+            <a ui-sref="splash" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">Home</a>
           </li>
           <li class="pure-menu-item">
-            <a ui-sref="about" class="pure-menu-link splash-menu-link">About</a>
+            <a ui-sref="about" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">About</a>
           </li>
           <li class="pure-menu-item">
-            <a ui-sref="login" class="pure-menu-link splash-menu-link">Login</a>
+            <a ui-sref="login" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">Login</a>
           </li>
         </ul>
       </div>

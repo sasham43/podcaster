@@ -71,3 +71,15 @@ a.pure-button-primary {
   color: #f05a66;
   background-color: #fff;
 }
+
+.facebook-link {
+  background-color: #365899;
+  color: #fff;
+  text-decoration: none;
+  padding: 4%;
+}
+
+.facebook-link:hover{
+  border: solid 4px #fff;
+  border-radius: 3px;
+}

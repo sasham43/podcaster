@@ -1,21 +1,20 @@
 angular.module('PodcastApp', ['ui.router']);
 
-angular.module('PodcastApp').config(['$stateProvider', function($stateProvider){
+angular.module('PodcastApp').config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider){
   $stateProvider.state({
     name: 'splash',
     url: '/',
     templateUrl: 'views/splash.html'
-  });
-  $stateProvider.state({
+  }).state({
     name: 'login',
     url: '/login',
     templateUrl: 'views/login.html'
-  });
-  $stateProvider.state({
+  }).state({
     name: 'about',
     url: '/about',
     templateUrl: 'views/about.html'
   });
+  // $locationProvider.html5Mode(true);
 }]);
 
 angular.module('PodcastApp').controller('SplashController', ['$http', function($http){
