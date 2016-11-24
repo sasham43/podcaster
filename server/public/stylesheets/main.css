@@ -10,17 +10,38 @@ a {
   color: #f05a66;
 }
 
+.pull-right {
+  float: right;
+}
+
+.pure-menu-heading {
+  text-transform: lowercase;
+  color: #fff;
+}
+
 .splash-menu {
-  /*color: #fff;*/
-  color: #f05a66;
-  border-top: solid 3px #f05a66;
-  padding-top: 1%;
-  padding-bottom: .5%;
+  color: #fff;
+  background-color: #f05a66;
+  /*border-top: solid 3px #f05a66;*/
+  border-bottom: solid 3px #fff;
+  padding-top: .5%;
+  /*padding-bottom: .5%;*/
 }
 
 .splash-menu-link {
+  /*background-color: #fff;
+  color: #f05a66;*/
+  color: #fff;
+  background-color: #f05a66;
+}
+
+.splash-menu-link:hover, .splash-menu-link:focus {
   background-color: #fff;
   color: #f05a66;
+}
+
+.splash-menu-link:focus {
+
 }
 
 .splash-menu-selected .splash-menu-link {
