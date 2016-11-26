@@ -11,14 +11,21 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
     res.redirect('/#/user');
   });
 
-// router.get('/check', function(req, res, next){
-//   console.log('requesting login status.');
-//   if(req.user){
-//     res.status(200).send(req.user);
-//     next()
-//   } else {
-//     res.status(401).redirect('/#/user');
-//   }
-// });
+router.get('/check', function(req, res, next){
+  if(req.user){
+    res.send(req.user);
+  } else {
+    res.status(401).send('Not logged in.');
+  }
+});
 
-module.exports = router;
+exports.router = router;
+exports.isAuthenticated = isAuthenticated;
+
+function isAuthenticated(req, res, next){
+  if (req.user.authenticated){
+    return next();
+  }
+
+  res.redirect('/#/');
+}

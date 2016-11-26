@@ -57,15 +57,15 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  db.customers.find({id:id}, function(err, results){
+  db.customers.findOne({id:id}, function(err, results){
     if(err){
       console.log('err');
       cb(err);
     } else {
-      console.log('user deserialized:', results);
+      console.log('user deserialized.', results);
+      cb(null, {id:id, authenticated: true, first_name: results.first_name, last_name: results.last_name, google_photo: results.google_photo});
     }
-  })
-  cb(null, id);
+  });
 });
 
 
@@ -76,7 +76,7 @@ db.create_customers(function(err, results){
 });
 
 app.use('/', index);
-app.use('/auth', auth);
+app.use('/auth', auth.router);
 
 
 app.listen(3000, function(){

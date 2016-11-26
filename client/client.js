@@ -23,20 +23,25 @@ angular.module('PodcastApp').config(['$stateProvider', '$locationProvider', func
   .state({
     name: 'user',
     url: '/user',
+    controller: 'UserController',
+    controllerAs: 'uc',
     templateUrl: 'views/user.html'
-  });
+  })
+  // console.log('stateProvider:', $stateProvider);
   // $locationProvider.html5Mode(true);
 }]);
 
-angular.module('PodcastApp').factory('AuthCheckService', ['$http', function($http){
+angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', function($http, $location, $state){
   return {
-    // authCheck: function(){
-    //   $http.get('/auth/check').then(function(resp){
-    //     console.log('auth check resp:', resp);
-    //   }, function(err){
-    //     console.log('auth check fail:', err)
-    //   });
-    // }
+    authCheck: function(){
+      $http.get('/auth/check').then(function(resp){
+        console.log('auth check resp:', resp);
+        return resp.data;
+      }, function(err){
+        console.log('auth check fail:', err);
+        $state.go('splash');
+      });
+    }
   }
 }]);
 
@@ -51,4 +56,10 @@ angular.module('PodcastApp').controller('LoginController', ['$http', function($h
 
 angular.module('PodcastApp').controller('AboutController', ['$http', function($http){
   console.log('About controller loaded. ');
+}]);
+
+angular.module('PodcastApp').controller('UserController', ['$http', 'AuthCheckService', function($http, AuthCheckService){
+  var uc = this;
+
+  uc.user = AuthCheckService.authCheck();
 }]);
