@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var passport = require('passport');
 var Massive = require('massive');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -16,13 +17,14 @@ var MassiveInstance = Massive.connectSync({db: dbUrl});
 app.set('db', MassiveInstance);
 app.use(express.static('server/public'));
 app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use(passport.session({
+app.use(session({
   secret: 'teal walls',
   resave: true,
   saveUninitialized: false,
   cookie: {maxAge: 3600000, secure: false}
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 var db = app.get('db');
 
@@ -45,7 +47,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  db.customers.find({facebook_id:id}, function(err, results){
+  db.customers.find({id:id}, function(err, results){
     if(err){
       console.log('err');
       cb(err);
