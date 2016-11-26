@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var Massive = require('massive');
-var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var index = require('./routes/index');
 var auth = require('./routes/auth');
@@ -28,19 +28,29 @@ app.use(passport.session());
 
 var db = app.get('db');
 
-passport.use(new FacebookStrategy({
-  clientID: process.env.FACEBOOK_ID,
-  clientSecret: process.env.FACEBOOK_SECRET,
-  callbackURL: process.env.FACEBOOK_CALLBACK
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_ID,
+  clientSecret: process.env.GOOGLE_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK
 }, function(accessToken, refreshToken, profile, cb){
-  console.log('db:', db);
-  var first_name = profile.displayName.split(' ')[0];
-  var last_name = profile.displayName.split(' ')[1];
-  db.customers.save({facebook_id: profile.id, facebook_token: accessToken, facebook_refresh: refreshToken, first_name: first_name, last_name:last_name},function(err, results){
-    console.log('saved user:', err, results, profile);
-    return cb(null, results);
+  db.customers.findOne({google_id: profile.id}, function(err, results){
+    console.log('customers:', err, results, profile);
+    if(results == null){
+      db.customers.insert({google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, results){
+        if(err){
+          console.log(err);
+          cb(err)
+        } else {
+          console.log('saved user:', results);
+          cb(null, results);
+        }
+      })
+    } else {
+      cb(null, results);
+    }
   })
-}));
+}))
+
 
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);

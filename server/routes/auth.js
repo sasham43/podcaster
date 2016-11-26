@@ -2,12 +2,12 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-router.get('/facebook', passport.authenticate('facebook'));
+router.get('/google', passport.authenticate('google', {scope: ['profile']}));
 
-router.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/#/login' , failureFlash: true}),
+router.get('/google/callback', passport.authenticate('google', {failureRedirect: '/#/login' , failureFlash: true}),
   function(req, res) {
     // Successful authentication, redirect home.
-    console.log('facebook logged in.')
+    console.log('google logged in.')
     res.redirect('/#/user');
   });
 

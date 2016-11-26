@@ -79,7 +79,14 @@ a.pure-button-primary {
   padding: 4%;
 }
 
-.facebook-link:hover{
+.google-link {
+  background-color: #d14836;
+  color: #fff;
+  padding: 4%;
+  text-decoration: none;
+}
+
+.facebook-link:hover, .google-link:hover{
   border: solid 4px #fff;
   border-radius: 3px;
 }
