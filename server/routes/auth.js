@@ -19,6 +19,11 @@ router.get('/check', function(req, res, next){
   }
 });
 
+router.get('/logout', function(req, res, next){
+  req.logout();
+  res.redirect('/#/');
+});
+
 exports.router = router;
 exports.isAuthenticated = isAuthenticated;
 

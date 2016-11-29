@@ -87,7 +87,6 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){
   console.log('Nav controller loaded. ');
   var rc = this;
-  // var authenticated = AuthCheckService.auth;
   rc.auth = false;
 
   $scope.$on('auth', function(evt, args){
@@ -96,7 +95,6 @@ angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'A
   });
 
   rc.authCheck = function(){
-    // console.log('AuthCheckService', AuthCheckService.auth);
     return rc.auth;
   };
 }]);

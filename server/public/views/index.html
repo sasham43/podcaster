@@ -32,8 +32,11 @@
           <li class="pure-menu-item">
             <a ui-sref="about" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">About</a>
           </li>
-          <li class="pure-menu-item">
+          <li class="pure-menu-item" ng-show="!rc.authCheck()">
             <a ui-sref="login" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">Login</a>
+          </li>
+          <li class="pure-menu-item" ng-show="rc.authCheck()">
+            <a href="/auth/logout" class="pure-menu-link splash-menu-link">Logout</a>
           </li>
         </ul>
       </div>
