@@ -13,7 +13,7 @@ angular.module('PodcastApp').run(function($rootScope) {
 angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider){
   $stateProvider.state({
     name: 'splash',
-    url: '/#/',
+    url: '/',
     templateUrl: 'views/splash.html'
   })
   .state({

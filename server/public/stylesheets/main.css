@@ -86,6 +86,10 @@ a.pure-button-primary {
   text-decoration: none;
 }
 
+.pure-menu-list {
+  margin-right: 10px;
+}
+
 .facebook-link:hover, .google-link:hover{
   border: solid 4px #fff;
   border-radius: 3px;
