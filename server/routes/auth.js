@@ -13,9 +13,9 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
 
 router.get('/check', function(req, res, next){
   if(req.user){
-    res.send(req.user);
+    res.send({authenticated: true, user: req.user});
   } else {
-    res.status(401).send('Not logged in.');
+    res.send({authenticated: false});
   }
 });
 
