@@ -26,8 +26,11 @@
           <li class="pure-menu-item" ng-show="rc.authCheck()">
             <a ui-sref="user" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">Profile</a>
           </li>
-          <li class="pure-menu-item">
+          <li class="pure-menu-item" ng-show="!rc.authCheck()">
             <a ui-sref="splash" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">Home</a>
+          </li>
+          <li class="pure-menu-item" ng-show="rc.authCheck()">
+            <a ui-sref="home" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">Home</a>
           </li>
           <li class="pure-menu-item">
             <a ui-sref="about" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">About</a>

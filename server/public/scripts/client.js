@@ -28,6 +28,16 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     templateUrl: 'views/about.html'
   })
   .state({
+    name: 'home',
+    url: '/home',
+    controller: 'HomeController',
+    controllerAs: 'hc',
+    templateUrl: 'views/home.html',
+    resolve: {user: function(AuthCheckService){
+      return AuthCheckService.resolveUser();
+    }}
+  })
+  .state({
     name: 'user',
     url: '/user',
     controller: 'UserController',
@@ -84,13 +94,22 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
   console.log('About controller loaded. ');
 }]);
 
+angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', function($http, user, AuthCheckService, $state){
+  console.log('Home controller loaded. ');
+  var hc = this;
+  if(!AuthCheckService.authCheck()){
+    $state.go('login');
+  }
+  hc.user = user.data.user;
+}]);
+
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){
   console.log('Nav controller loaded. ');
   var rc = this;
   rc.auth = false;
 
   $scope.$on('auth', function(evt, args){
-    console.log('auth', evt, args);
+    // console.log('auth', evt, args);
     rc.auth = args.auth;
   });
 
