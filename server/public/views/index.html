@@ -18,12 +18,12 @@
 
     <!-- <base href="/" /> -->
   </head>
-  <body>
-    <div class="header" ng-controller="NavController as nc">
+  <body ng-controller="RootController as rc">
+    <div class="header">
       <div class="pure-menu pure-menu-horizontal splash-menu">
         <a class="pure-menu-heading" href=" ">Podcaster</a>
         <ul class="pure-menu-list pull-right">
-          <li class="pure-menu-item" ng-show="nc.authCheck()">
+          <li class="pure-menu-item" ng-show="rc.authCheck()">
             <a ui-sref="user" ui-sref-active="splash-menu-selected" class="pure-menu-link splash-menu-link">User</a>
           </li>
           <li class="pure-menu-item">

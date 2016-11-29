@@ -41,29 +41,6 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
   $urlRouterProvider.otherwise('/');
 }]);
 
-angular.module('PodcastApp').factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
-    return {
-        response: function(response){
-            if (response.status === 401) {
-                console.log("Response 401");
-            }
-            return response || $q.when(response);
-        },
-        responseError: function(rejection) {
-            if (rejection.status === 401) {
-                console.log("Response Error 401",rejection);
-                $location.path('/#/login');
-            }
-            return $q.reject(rejection);
-        }
-    }
-}]);
-
-angular.module('PodcastApp').config(['$httpProvider',function($httpProvider) {
-    //Http Intercpetor to check auth failures for xhr requests
-    $httpProvider.interceptors.push('authHttpResponseInterceptor');
-}]);
-
 angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', function($http, $location, $state){
   var user = {};
   var auth = false;
@@ -107,26 +84,29 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
   console.log('About controller loaded. ');
 }]);
 
-angular.module('PodcastApp').controller('NavController', ['$http', '$state', 'AuthCheckService', function($http, $state, AuthCheckService){
+angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){
   console.log('Nav controller loaded. ');
-  var nc = this;
-  var authenticated = AuthCheckService.auth;
+  var rc = this;
+  // var authenticated = AuthCheckService.auth;
+  rc.auth = false;
 
-  nc.authCheck = function(){
+  $scope.$on('auth', function(evt, args){
+    console.log('auth', evt, args);
+    rc.auth = args.auth;
+  });
 
-    if (authenticated == true){
-      return true;
-    } else {
-      return false;
-    }
+  rc.authCheck = function(){
+    // console.log('AuthCheckService', AuthCheckService.auth);
+    return rc.auth;
   };
 }]);
 
-angular.module('PodcastApp').controller('UserController', ['$http', 'AuthCheckService', '$state', 'user', function($http, AuthCheckService, $state, user){
+angular.module('PodcastApp').controller('UserController', ['$http', 'AuthCheckService', '$state', 'user', '$scope', function($http, AuthCheckService, $state, user, $scope){
   var uc = this;
   if(!AuthCheckService.authCheck()){
     $state.go('login');
   }
+  $scope.$emit('auth', {auth: true});
   console.log(user);
   uc.user = user.data.user;
 }]);
