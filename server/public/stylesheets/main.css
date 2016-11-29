@@ -67,6 +67,10 @@ a {
   color: #fff;
 }
 
+.login-text {
+  margin-bottom: 50px;
+}
+
 a.pure-button-primary {
   color: #f05a66;
   background-color: #fff;
