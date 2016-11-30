@@ -128,6 +128,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
         hc.feed.itunes_category.push(category);
         break;
     }
+    category = '';
   };
 
   hc.removeCategory = function(dest, i){

@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form name="feed" class="pure-form pure-form-stacked feed-form">
+  <form name="feed" class="pure-form pure-form-stacked feed-form" autocomplete="on">
 
     <label for="title">Title</label>
     <input type="text" name="title" placeholder="Title" ng-model="hc.feed.title"/>
@@ -45,10 +45,10 @@
     </div>
 
     <label for="pub_date">Publication Date</label>
-    <input type="text" name="pub_date" placeholder="Pub Date" ng-model="hc.feed.pub_date"/>
+    <input type="date" name="pub_date" placeholder="Pub Date" ng-model="hc.feed.pub_date"/>
 
     <label for="ttl">TTL</label>
-    <input type="text" name="ttl" placeholder="TTL"/>
+    <input type="number" name="ttl" ng-model="hc.feed.ttl" placeholder="TTL"/>
 
     <label for="itunes_author">iTunes Author</label>
     <input type="text" name="itunes_author" placeholder="iTunes Author" ng-model="hc.feed.itunes_author"/>
@@ -63,7 +63,7 @@
     <input type="text" name="itunes_owner" placeholder="iTunes Owner" ng-model="hc.feed.itunes_owner"/>
 
     <label for="itunes_explicit">iTunes Explicit</label>
-    <input type="text" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
+    <input type="checkbox" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
 
     <label for="itunes_category">iTunes Category</label>
     <input type="text" name="itunes_category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>

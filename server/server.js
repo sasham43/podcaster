@@ -9,6 +9,7 @@ var Massive = require('massive');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var index = require('./routes/index');
+var podcast = require('./routes/podcast');
 var auth = require('./routes/auth');
 
 var dbUrl = process.env.DB_URL || 'podcaster';
@@ -82,6 +83,7 @@ db.create_episodes(function(err, results){
 });
 
 app.use('/', index);
+app.use('/podcast', podcast);
 app.use('/auth', auth.router);
 
 
