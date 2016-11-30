@@ -74,6 +74,12 @@ passport.deserializeUser(function(id, cb) {
 db.create_customers(function(err, results){
   console.log('created customers table.', err, results);
 });
+db.create_feeds(function(err, results){
+  console.log('created feeds table', err, results);
+});
+db.create_episodes(function(err, results){
+  console.log('created episodes table', err, results);
+});
 
 app.use('/', index);
 app.use('/auth', auth.router);

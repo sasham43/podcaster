@@ -10,6 +10,10 @@ a {
   color: #f05a66;
 }
 
+input {
+  color: #222;
+}
+
 .pull-right {
   float: right;
 }
@@ -97,6 +101,7 @@ a.pure-button-primary {
 
 .home {
   color: #fff;
+  overflow: auto;
 }
 
 .home-menu a {
@@ -108,7 +113,7 @@ a.pure-button-primary {
   display: inline-block;
 }
 
-.xml-link {
+.feed-link {
   margin-right: -5px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -126,4 +131,24 @@ a.pure-button-primary {
 .facebook-link:hover, .google-link:hover{
   border: solid 4px #fff;
   border-radius: 3px;
+}
+
+.feed-form {
+  text-align:left;
+  padding: 3vh 15vw;
+  /*padding-bottom: 3vh;*/
+}
+
+.feed-form input {
+  width: 100%;
+}
+
+.save-container {
+  text-align: right;
+}
+
+.save-button {
+  background-color: #f05a66;
+  color: #fff;
+  border: solid 1px #fff;
 }
