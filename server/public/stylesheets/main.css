@@ -49,6 +49,11 @@ a {
   background-color: #fff !important;
 }
 
+.splash-menu-selected{
+  color: #f05a66 !important;
+  background-color: #fff !important;
+}
+
 .page-container {
     height: 100vh;
     background-color: #f05a66;
@@ -88,6 +93,30 @@ a.pure-button-primary {
   color: #fff;
   padding: 4%;
   text-decoration: none;
+}
+
+.home {
+  color: #fff;
+}
+
+.home-menu a {
+  color: #fff;
+  text-decoration: none;
+  border: solid 1px #fff;
+  padding: 10px;
+  width: 10%;
+  display: inline-block;
+}
+
+.xml-link {
+  margin-right: -5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.episodes-link {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .pure-menu-list {

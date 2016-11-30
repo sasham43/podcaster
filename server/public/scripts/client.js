@@ -38,6 +38,18 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     }}
   })
   .state({
+    name: 'home.xml',
+    url: '/home/xml',
+    templateUrl: 'views/home-xml.html',
+    parent: 'home'
+  })
+  .state({
+    name: 'home.episodes',
+    url: '/home/episodes',
+    templateUrl: 'views/home-episodes.html',
+    parent: 'home'
+  })
+  .state({
     name: 'user',
     url: '/user',
     controller: 'UserController',

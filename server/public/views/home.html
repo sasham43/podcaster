@@ -1,5 +1,8 @@
-<div class="page-container">
-  <h4>Home</h4>
-  <h5>Settings</h5>
-  <h5>Episodes</h5>
+<div class="page-container home">
+  <h2>Home</h2>
+  <div class="home-menu">
+    <a class="xml-link" ui-sref="home.xml" ui-sref-active="splash-menu-selected">XML</a>
+    <a class="episodes-link" ui-sref="home.episodes" ui-sref-active="splash-menu-selected">Episodes</a>
+  </div>
+  <ui-view></ui-view>
 </div>
