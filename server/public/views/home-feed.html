@@ -37,11 +37,13 @@
     <label for="language">Language</label>
     <input type="text" name="language" placeholder="Language" ng-model="hc.feed.language"/>
 
-    <label for="categories">Categories</label>
-    <input type="text" name="categories" placeholder="Categories" ng-model="hc.category"/>
-    <button ng-click="hc.addCategory(1, hc.category)" type="button">+</button>
+    <div class="">
+      <label for="categories">Categories</label>
+      <input type="text" name="categories" id="feed-categories" placeholder="Categories" ng-model="hc.category"/>
+      <button ng-click="hc.addCategory(1, hc.category)" class="pure-button add-button" type="button">+</button>
+    </div>
     <div class="categories-container">
-      <span ng-repeat="cat in hc.feed.categories track by $index">{{cat}}<button type="button" ng-click="hc.removeCategory(1, $index)">x</button></span>
+      <span class="categories-span" ng-repeat="cat in hc.feed.categories track by $index">{{cat}}<button type="button" ng-click="hc.removeCategory(1, $index)">x</button></span>
     </div>
 
     <label for="pub_date">Publication Date</label>
@@ -66,17 +68,17 @@
     <input type="checkbox" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
 
     <label for="itunes_category">iTunes Category</label>
-    <input type="text" name="itunes_category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
-    <button ng-click="hc.addCategory(2, hc.itunes_category)" type="button">+</button>
+    <input type="text" name="itunes_category" id="feed-itunes-category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
+    <button ng-click="hc.addCategory(2, hc.itunes_category)" class="pure-button add-button" type="button">+</button>
     <div class="categories-container">
-      <span ng-repeat="cat in hc.feed.itunes_category track by $index">{{cat}}<button type="button" ng-click="hc.removeCategory(2, $index)">x</button></span>
+      <span class="categories-span" ng-repeat="cat in hc.feed.itunes_category track by $index">{{cat}}<button type="button" ng-click="hc.removeCategory(2, $index)">x</button></span>
     </div>
 
     <label for="itunes_image">iTunes Image</label>
     <input type="text" name="itunes_image" placeholder="iTunes Image" ng-model="hc.feed.itunes_image"/>
 
     <div class="save-container">
-        <button ng-click="hc.saveFeed()" type="button" class="pure-button save-button">Save Feed</button>
+        <button ng-click="hc.saveFeed()" type="button" class="pure-button save-button">Save Details</button>
     </div>
 
   </form>

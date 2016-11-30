@@ -143,6 +143,22 @@ a.pure-button-primary {
   width: 100%;
 }
 
+#feed-categories, #feed-itunes-category {
+  display: inline-block;
+  width: 92%;
+}
+
+.categories-container {
+  margin: 10px;
+}
+
+.categories-span {
+  margin: 0 3px;
+  border: solid 1px #fff;
+  border-radius: 4px;
+  padding: 6px;
+}
+
 .save-container {
   text-align: right;
 }
@@ -151,4 +167,15 @@ a.pure-button-primary {
   background-color: #f05a66;
   color: #fff;
   border: solid 1px #fff;
+}
+
+.add-button {
+  display: inline-block;
+  margin-left: -10px;
+  width: 8.5%;
+  height: 36px;
+  background-color: #f05a66;
+  box-sizing: border-box;
+  border: solid 1px #fff;
+  color: #fff;
 }
