@@ -111,56 +111,60 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
 angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', 'FeedService', function($http, user, AuthCheckService, $state, FeedService){
   console.log('Home controller loaded. ');
   var hc = this;
-  if(!AuthCheckService.authCheck()){
-    $state.go('login');
-  }
+  hc.auth = AuthCheckService.authCheck();
   hc.user = user.data.user;
-  console.log('hc.user:', hc.user);
-  hc.feed = {categories: [], itunes_category: []};
-  hc.feed = FeedService.get({id:hc.user.id});
+  console.log('hc auth:', hc.auth);
+  if(hc.auth == null || hc.user == null){
+    console.log('go login');
+    $state.go('login');
+  } else {
+    console.log('hc.user:', hc.user);
+    hc.feed = {categories: [], itunes_category: []};
+    hc.feed = FeedService.get({id:hc.user.id});
 
-  // hc.getFeed = function(){
-  //   console.log('feed:', hc.user);
-  //   $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
-  //     console.log('got feed:', resp);
-  //     hc.feed = resp;
-  //   }, function(err){
-  //     console.log('get fail:', err);
-  //   });
-  // };
+    // hc.getFeed = function(){
+    //   console.log('feed:', hc.user);
+    //   $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
+    //     console.log('got feed:', resp);
+    //     hc.feed = resp;
+    //   }, function(err){
+    //     console.log('get fail:', err);
+    //   });
+    // };
 
-  // hc.getFeed();
+    // hc.getFeed();
 
-  hc.saveFeed = function(){
-    $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){
-      console.log('create resp', resp);
-    }, function(err){
-      console.log('create fail:', err);
-    });
-  };
+    hc.saveFeed = function(){
+      $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){
+        console.log('create resp', resp);
+      }, function(err){
+        console.log('create fail:', err);
+      });
+    };
 
-  hc.addCategory = function(dest, category){
-    switch(dest){
-      case 1:
-        hc.feed.categories.push(category);
-        break;
-      case 2:
-        hc.feed.itunes_category.push(category);
-        break;
-    }
-    category = '';
-  };
+    hc.addCategory = function(dest, category){
+      switch(dest){
+        case 1:
+          hc.feed.categories.push(category);
+          break;
+        case 2:
+          hc.feed.itunes_category.push(category);
+          break;
+      }
+      category = '';
+    };
 
-  hc.removeCategory = function(dest, i){
-    switch(dest){
-      case 1:
-        hc.feed.categories.splice(i, 1);
-        break;
-      case 2:
-        hc.feed.itunes_category.splice(i, 1);
-        break;
-    }
-  };
+    hc.removeCategory = function(dest, i){
+      switch(dest){
+        case 1:
+          hc.feed.categories.splice(i, 1);
+          break;
+        case 2:
+          hc.feed.itunes_category.splice(i, 1);
+          break;
+      }
+    };
+  }
 }]);
 
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){

@@ -49,6 +49,7 @@ router.post('/:id/create-feed', function(req, res){
       res.status(500).send(err);
     } else {
       console.log('results:', results);
+      results.pub_date = new Date(results.pub_date);
       res.status(200).send(results);
     }
   })
