@@ -10,6 +10,37 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var index = require('./routes/index');
 var podcast = require('./routes/podcast');
 var auth = require('./routes/auth');
+var dbconn = require('./db/db');
+
+var db;
+
+dbconn('podcaster').then(function(db_conn){
+  console.log('db connected.');
+  db = db_conn;
+
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK
+  }, function(accessToken, refreshToken, profile, cb){
+    db.customers.findOne({google_id: profile.id}, function(err, results){
+      console.log('customers:', err, results, profile);
+      if(results == null){
+        db.customers.insert({google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, results){
+          if(err){
+            console.log(err);
+            cb(err)
+          } else {
+            console.log('saved user:', results);
+            cb(null, results);
+          }
+        })
+      } else {
+        cb(null, results);
+      }
+    })
+  }))
+})
 
 app.use(express.static('server/public'));
 app.use(bodyParser.json());
@@ -22,28 +53,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_ID,
-  clientSecret: process.env.GOOGLE_SECRET,
-  callbackURL: process.env.GOOGLE_CALLBACK
-}, function(accessToken, refreshToken, profile, cb){
-  db.customers.findOne({google_id: profile.id}, function(err, results){
-    console.log('customers:', err, results, profile);
-    if(results == null){
-      db.customers.insert({google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, results){
-        if(err){
-          console.log(err);
-          cb(err)
-        } else {
-          console.log('saved user:', results);
-          cb(null, results);
-        }
-      })
-    } else {
-      cb(null, results);
-    }
-  })
-}))
 
 
 passport.serializeUser(function(user, cb) {

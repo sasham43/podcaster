@@ -109,10 +109,23 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     $state.go('login');
   }
   hc.user = user.data.user;
+  console.log('hc.user:', hc.user);
   hc.feed = {categories: [], itunes_category: []};
 
+  hc.getFeed = function(){
+    console.log('feed:', hc.user);
+    $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
+      console.log('got feed:', resp);
+      hc.feed = resp;
+    }, function(err){
+      console.log('get fail:', err);
+    });
+  };
+
+  hc.getFeed();
+
   hc.saveFeed = function(){
-    $http.post('/podcast/create-feed', hc.feed).then(function(resp){
+    $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){
       console.log('create resp', resp);
     }, function(err){
       console.log('create fail:', err);

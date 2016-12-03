@@ -15,9 +15,34 @@ router.use(function(req, res, next){
   });
 });
 
+// router.use('/:id', function(req, res, next){
+//   console.log('attaching user to req')
+//   req.db.customers.findOne({id:req.params.id}, function(err, results){
+//     if(err){
+//       return next(err);
+//     } else {
+//       console.log('results:', results);
+//       req.customer = results;
+//       return next();
+//     }
+//   })
+// })
 
-router.post('/create-feed', function(req, res){
+router.get('/:id/feed', function(req, res){
+  req.db.feeds.findOne({customer_id:req.params.id}, function(err, results){
+    if(err){
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  })
+})
+
+
+router.post('/:id/create-feed', function(req, res){
   var feed = req.body;
+  feed.customer_id = req.params.id;
+  console.log('feed:', feed);
   req.db.feeds.save(feed, function(err, results){
     if(err){
       console.log('create-feed err:',err);
