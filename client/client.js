@@ -1,11 +1,7 @@
-angular.module('PodcastApp', ['ui.router']);
+angular.module('PodcastApp', ['ui.router', 'ngResource']);
 
 angular.module('PodcastApp').run(function($rootScope) {
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error){
-    console.log('1 2 3', event, toState, toParams, fromState, fromParams, error);
-    // if(error.status == 401){
-    //   $state.go('login');
-    // }
     console.log.bind(console)
   }); // no idea if this is working -> yes is working
 });
@@ -38,14 +34,14 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     }}
   })
   .state({
-    name: 'home.xml',
-    url: '/home/xml',
-    templateUrl: 'views/home-xml.html',
+    name: 'home.feed',
+    url: '/feed',
+    templateUrl: 'views/home-feed.html',
     parent: 'home'
   })
   .state({
     name: 'home.episodes',
-    url: '/home/episodes',
+    url: '/episodes',
     templateUrl: 'views/home-episodes.html',
     parent: 'home'
   })
@@ -61,6 +57,12 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
   });
 
   $urlRouterProvider.otherwise('/');
+}]);
+
+angular.module('PodcastApp').factory('FeedService', ['$resource', function($resource){
+  return $resource('/podcast/:id/feed', {
+    id: '@customer_id'
+  });
 }]);
 
 angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', function($http, $location, $state){
@@ -106,13 +108,59 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
   console.log('About controller loaded. ');
 }]);
 
-angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', function($http, user, AuthCheckService, $state){
+angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', 'FeedService', function($http, user, AuthCheckService, $state, FeedService){
   console.log('Home controller loaded. ');
   var hc = this;
   if(!AuthCheckService.authCheck()){
     $state.go('login');
   }
   hc.user = user.data.user;
+  console.log('hc.user:', hc.user);
+  hc.feed = {categories: [], itunes_category: []};
+  hc.feed = FeedService.get({id:hc.user.id});
+
+  // hc.getFeed = function(){
+  //   console.log('feed:', hc.user);
+  //   $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
+  //     console.log('got feed:', resp);
+  //     hc.feed = resp;
+  //   }, function(err){
+  //     console.log('get fail:', err);
+  //   });
+  // };
+
+  // hc.getFeed();
+
+  hc.saveFeed = function(){
+    $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){
+      console.log('create resp', resp);
+    }, function(err){
+      console.log('create fail:', err);
+    });
+  };
+
+  hc.addCategory = function(dest, category){
+    switch(dest){
+      case 1:
+        hc.feed.categories.push(category);
+        break;
+      case 2:
+        hc.feed.itunes_category.push(category);
+        break;
+    }
+    category = '';
+  };
+
+  hc.removeCategory = function(dest, i){
+    switch(dest){
+      case 1:
+        hc.feed.categories.splice(i, 1);
+        break;
+      case 2:
+        hc.feed.itunes_category.splice(i, 1);
+        break;
+    }
+  };
 }]);
 
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){

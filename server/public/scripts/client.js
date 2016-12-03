@@ -1,4 +1,4 @@
-angular.module('PodcastApp', ['ui.router']);
+angular.module('PodcastApp', ['ui.router', 'ngResource']);
 
 angular.module('PodcastApp').run(function($rootScope) {
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error){
@@ -59,6 +59,12 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
   $urlRouterProvider.otherwise('/');
 }]);
 
+angular.module('PodcastApp').factory('FeedService', ['$resource', function($resource){
+  return $resource('/podcast/:id/feed', {
+    id: '@customer_id'
+  });
+}]);
+
 angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', function($http, $location, $state){
   var user = {};
   var auth = false;
@@ -102,7 +108,7 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
   console.log('About controller loaded. ');
 }]);
 
-angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', function($http, user, AuthCheckService, $state){
+angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', 'FeedService', function($http, user, AuthCheckService, $state, FeedService){
   console.log('Home controller loaded. ');
   var hc = this;
   if(!AuthCheckService.authCheck()){
@@ -111,18 +117,19 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
   hc.user = user.data.user;
   console.log('hc.user:', hc.user);
   hc.feed = {categories: [], itunes_category: []};
+  hc.feed = FeedService.get({id:hc.user.id});
 
-  hc.getFeed = function(){
-    console.log('feed:', hc.user);
-    $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
-      console.log('got feed:', resp);
-      hc.feed = resp;
-    }, function(err){
-      console.log('get fail:', err);
-    });
-  };
+  // hc.getFeed = function(){
+  //   console.log('feed:', hc.user);
+  //   $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
+  //     console.log('got feed:', resp);
+  //     hc.feed = resp;
+  //   }, function(err){
+  //     console.log('get fail:', err);
+  //   });
+  // };
 
-  hc.getFeed();
+  // hc.getFeed();
 
   hc.saveFeed = function(){
     $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){

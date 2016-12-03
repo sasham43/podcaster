@@ -30,6 +30,7 @@ module.exports = function(grunt) {
             'angular/angular.min.js.map',
             'purecss/build/pure-min.css',
             'purecss/build/grids-responsive-min.css',
+            'angular-resource/angular-resource.min.js',
             'angular-ui-router/release/angular-ui-router.min.js'
           ],
           dest: 'server/public/vendor/'},
