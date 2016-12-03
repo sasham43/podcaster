@@ -5,17 +5,12 @@ var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
-var Massive = require('massive');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var index = require('./routes/index');
 var podcast = require('./routes/podcast');
 var auth = require('./routes/auth');
 
-var dbUrl = process.env.DB_URL || 'podcaster';
-var MassiveInstance = Massive.connectSync({db: dbUrl});
-
-app.set('db', MassiveInstance);
 app.use(express.static('server/public'));
 app.use(bodyParser.json());
 app.use(session({
@@ -26,8 +21,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-var db = app.get('db');
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_ID,
@@ -69,18 +62,6 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
-
-// console.log('db connected:', db);
-
-db.create_customers(function(err, results){
-  console.log('created customers table.', err, results);
-});
-db.create_feeds(function(err, results){
-  console.log('created feeds table', err, results);
-});
-db.create_episodes(function(err, results){
-  console.log('created episodes table', err, results);
-});
 
 app.use('/', index);
 app.use('/podcast', podcast);

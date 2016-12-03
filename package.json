@@ -21,7 +21,8 @@
     "passport": "^0.3.2",
     "passport-google-oauth20": "^1.0.0",
     "podcast": "^0.2.2",
-    "purecss": "^0.6.0"
+    "purecss": "^0.6.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

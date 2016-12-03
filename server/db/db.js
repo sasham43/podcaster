@@ -1,14 +1,39 @@
 var Massive = require('massive');
+var q = require('q');
 
-var dbUrl = process.env.DB_URL || 'podcaster';
+var connectionString = process.env.DB_URL || 'podcaster';
 
-// module.exports.db
-var db = Massive.connectSync({db: dbUrl}, function(err, db){
-  console.log('db connected.');
-  return db;
-});
+var connections;
+var dbconn;
 
+module.exports = dbconn = function(name){
+  connections = connections || {};
+  var d = q.defer();
+  if(connections[name]){
+    d.resolve(connections[name]);
+  } else {
+    Massive.connect({
+      connectionString: connectionString
+    }, function(err, db){
+      if(err){
+        d.reject(err);
+      } else {
+        connections[name] = db;
+        d.resolve(db);
+      }
+    })
+  }
+  return d.promise;
+}
 
-db.create_customers();
-
-module.exports = db;
+dbconn('podcaster').then(function(db){    
+    db.create_customers(function(err, results){
+      console.log('created customers table.', err, results);
+    });
+    db.create_feeds(function(err, results){
+      console.log('created feeds table', err, results);
+    });
+    db.create_episodes(function(err, results){
+      console.log('created episodes table', err, results);
+    });
+})
