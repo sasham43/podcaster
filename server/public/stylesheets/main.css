@@ -152,10 +152,11 @@ a.pure-button-primary {
   margin: 10px;
 }
 
-.categories-span {
-  margin: 0 3px;
+.categories-pod {
+  margin: 3px 3px;
   border: solid 1px #fff;
   border-radius: 4px;
+  display: inline-block;
   padding: 6px;
 }
 
