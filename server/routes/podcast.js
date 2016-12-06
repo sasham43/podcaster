@@ -33,6 +33,7 @@ router.get('/:id/feed', function(req, res){
     if(err){
       res.status(500).send(err);
     } else {
+      res.pub_date = new Date(res.pub_date);
       res.status(200).send(results);
     }
   })

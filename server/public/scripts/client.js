@@ -6,7 +6,7 @@ angular.module('PodcastApp').run(function($rootScope) {
   }); // no idea if this is working -> yes is working
 });
 
-angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider){
+angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide', function($stateProvider, $urlRouterProvider, $httpProvider, $provide){
   $stateProvider.state({
     name: 'splash',
     url: '/',
@@ -57,11 +57,28 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
   });
 
   $urlRouterProvider.otherwise('/');
+  $provide.factory('DateInterceptor', ['$q', function($q){
+    return {
+      'response': function(resp){
+        if(resp.data.pub_date){
+          resp.data.pub_date = new Date(resp.data.pub_date);
+          return resp;
+        } else {
+          return resp;
+        }
+      }
+    }
+  }])
+  $httpProvider.interceptors.push('DateInterceptor');
 }]);
 
 angular.module('PodcastApp').factory('FeedService', ['$resource', function($resource){
   return $resource('/podcast/:id/feed', {
     id: '@customer_id'
+  }, {get: {
+        method: 'GET',
+        interceptor: 'DateInterceptor'
+      }
   });
 }]);
 
@@ -122,18 +139,6 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     hc.feed = {categories: [], itunes_category: []};
     hc.feed = FeedService.get({id:hc.user.id});
 
-    // hc.getFeed = function(){
-    //   console.log('feed:', hc.user);
-    //   $http.get('/podcast/' + hc.user.id + '/feed').then(function(resp){
-    //     console.log('got feed:', resp);
-    //     hc.feed = resp;
-    //   }, function(err){
-    //     console.log('get fail:', err);
-    //   });
-    // };
-
-    // hc.getFeed();
-
     hc.saveFeed = function(){
       $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){
         console.log('create resp', resp);
@@ -142,7 +147,8 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
       });
     };
 
-    hc.addCategory = function(dest, category){
+    hc.addCategory = function(dest, category, evt){
+      console.log('event:', evt);
       switch(dest){
         case 1:
           hc.feed.categories.push(category);

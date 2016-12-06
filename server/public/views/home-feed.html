@@ -1,6 +1,5 @@
 <div class="form-container">
   <form name="feed" class="pure-form pure-form-stacked feed-form" autocomplete="on">
-
     <label for="title">Title</label>
     <input type="text" name="title" placeholder="Title" ng-model="hc.feed.title"/>
 
@@ -67,12 +66,15 @@
     <label for="itunes_explicit">iTunes Explicit</label>
     <input type="checkbox" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
 
-    <label for="itunes_category">iTunes Category</label>
-    <input type="text" name="itunes_category" id="feed-itunes-category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
-    <button ng-click="hc.addCategory(2, hc.itunes_category)" class="pure-button add-button" type="button">+</button>
-    <div class="categories-container">
-      <div class="categories-pod" ng-repeat="cat in hc.feed.itunes_category track by $index">{{cat}}<button type="button" ng-click="hc.removeCategory(2, $index)">x</button></div>
-    </div>
+    <form class="itunes_category">
+      <label for="itunes_category">iTunes Category</label>
+      <input type="text" name="itunes_category" id="feed-itunes-category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
+      <button ng-click="hc.addCategory(2, hc.itunes_category)" ng-submit="hc.addCategory(2, hc.itunes_category, $event)"  class="pure-button add-button" type="button">+</button>
+      <div class="categories-container">
+        <div class="categories-pod" ng-repeat="cat in hc.feed.itunes_category track by $index">{{cat}}<button type="button" ng-click="hc.removeCategory(2, $index)">x</button></div>
+      </div>
+    </form>
+
 
     <label for="itunes_image">iTunes Image</label>
     <input type="text" name="itunes_image" placeholder="iTunes Image" ng-model="hc.feed.itunes_image"/>
