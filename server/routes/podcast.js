@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var fs = require('fs');
 var Podcast = require('podcast');
 var dbconn = require('../db/db');
 
@@ -73,11 +73,15 @@ function createPodcast(options){
   options.managingEditor = options.managing_editor;
   options.webMaster = options.web_master;
 
-
   var feed = new Podcast(options);
   var xml = feed.xml();
   console.log('feed:', feed);
-  return 'published.';
+  var title = feed.title.replace(' ', '_');
+  var filename = title + '.xml';
+  fs.writeFile(filename, xml, function(resp){
+    console.log('xml created');
+    return 'published.';
+  })
 }
 
 module.exports = router;
