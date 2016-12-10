@@ -140,10 +140,8 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     hc.feed = FeedService.get({id:hc.user.id});
 
     hc.saveFeed = function(){
-      $http.post('/podcast/' + hc.user.id  + '/create-feed', hc.feed).then(function(resp){
-        console.log('create resp', resp);
-      }, function(err){
-        console.log('create fail:', err);
+      FeedService.save({id:hc.user.id}, hc.feed, function(resp){
+        console.log('save response:', resp);
       });
     };
 

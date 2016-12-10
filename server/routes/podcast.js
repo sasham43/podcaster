@@ -40,7 +40,7 @@ router.get('/:id/feed', function(req, res){
 })
 
 
-router.post('/:id/create-feed', function(req, res){
+router.post('/:id/feed', function(req, res){
   var feed = req.body;
   feed.customer_id = req.params.id;
   console.log('feed:', feed);
