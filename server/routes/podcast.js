@@ -33,11 +33,11 @@ router.get('/:id/feed', function(req, res){
     if(err){
       res.status(500).send(err);
     } else {
-      res.pub_date = new Date(res.pub_date);
+      // res.pub_date = new Date(res.pub_date);
       res.status(200).send(results);
     }
-  })
-})
+  });
+});
 
 
 router.post('/:id/feed', function(req, res){
@@ -53,11 +53,22 @@ router.post('/:id/feed', function(req, res){
       results.pub_date = new Date(results.pub_date);
       res.status(200).send(results);
     }
-  })
+  });
+});
+
+router.get('/:id/publish', function(req, res){
+  req.db.feeds.findOne({customer_id: req.params.id}, function(err, results){
+    if(err){
+      res.status(500).send(err);
+    } else {
+      // console.log('create podcast:', results);
+      var pub = createPodcast(results);
+      res.status(200).send(pub);
+    }
+  });
 });
 
 function createPodcast(options){
-  // var options = req.body;
   options.pubDate = options.pub_date;
   options.managingEditor = options.managing_editor;
   options.webMaster = options.web_master;
@@ -66,7 +77,7 @@ function createPodcast(options){
   var feed = new Podcast(options);
   var xml = feed.xml();
   console.log('feed:', feed);
-  // res.status(200).send('Yaaaa');
+  return 'published.';
 }
 
 module.exports = router;

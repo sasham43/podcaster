@@ -180,3 +180,20 @@ a.pure-button-primary {
   border: solid 1px #fff;
   color: #fff;
 }
+
+.remove-category {
+  border-radius: 15px;
+  background-color: #fff;
+  color: #f05a66;
+  width: 25px;
+  height: 25px;
+  border: none;
+  margin: 5px;
+  margin-left: 10px;
+}
+
+.remove-category:active{
+  background-color: #f05a66;
+  color: #fff;
+  border: solid 1px #fff;
+}

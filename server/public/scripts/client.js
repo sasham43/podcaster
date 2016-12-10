@@ -139,6 +139,14 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     hc.feed = {categories: [], itunes_category: []};
     hc.feed = FeedService.get({id:hc.user.id});
 
+    hc.publishFeed = function(){
+      $http.get('/podcast/' + hc.user.id + '/publish', function(resp){
+        console.log('published:', resp);
+      }, function(err){
+        console.log('err published:', err);
+      });
+    };
+
     hc.saveFeed = function(){
       FeedService.save({id:hc.user.id}, hc.feed, function(resp){
         console.log('save response:', resp);
@@ -146,7 +154,6 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     };
 
     hc.addCategory = function(dest, category, evt){
-      console.log('event:', evt);
       switch(dest){
         case 1:
           hc.feed.categories.push(category);
