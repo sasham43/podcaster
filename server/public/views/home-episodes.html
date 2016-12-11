@@ -1,1 +1,36 @@
 <h4>Episodes</h4>
+<div class="add-episode-container">
+  <h5>Add Episode</h5>
+  <form class="pure-form pure-form-stacked feed-form">
+
+    <label for="title">Title</label>
+    <input type="text" name="title" ng-model="hc.new_episode.title" />
+
+    <label for="description">Description</label>
+    <input type="text" name="description" ng-model="hc.new_episode.description" />
+
+    <label for="category">Categories</label>
+    <input type="text" id="episode-category" name="category" ng-model="hc.new_episode_category" />
+    <button ng-click="hc.addCategory(3, hc.new_episode_category)" class="pure-button add-button" type="button">+</button>
+    <div class="categories-container">
+      <div class="categories-pod" ng-repeat="cat in hc.new_episode.categories track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(3, $index)">x</button></div>
+    </div>
+
+    <label for="author">Author</label>
+    <input type="text" name="author" ng-model="hc.new_episode.author" />
+
+    <label for="date">Date</label>
+    <input type="date" name="date" ng-model="hc.new_episode.date" />
+
+    <div class="save-container">
+      <button type="submit" ng-click="hc.addEpisode(hc.new_episode)" ng-submit="hc.addEpisode(hc.new_episode)">Save Episode</button>
+    </div>
+
+    <!-- upload mp3 stuff here -->
+  </form>
+</div>
+<div class="episode-list-container">
+  <div class="episode-container" ng-repeat="ep in hc.episodes">
+    <span class="episode-index">{{ $index + 1 }}.</span> <span class="episode-title">{{ ep.title }}</span>
+  </div>
+</div>

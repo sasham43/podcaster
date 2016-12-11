@@ -28,6 +28,39 @@ router.use(function(req, res, next){
 //   })
 // })
 
+router.get('/:id/episodes', function(req, res){
+  req.db.episodes.find({customer_id: req.params.id}, function(err, results){
+    if(err){
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
+router.post('/:id/episodes', function(req, res){
+  req.body.customer_id = req.params.id;
+  req.db.episodes.insert(req.body, function(err, results){
+    if(err){
+      res.status(500).send(err);
+    } else {
+      // res.pub_date = new Date(res.pub_date);
+      res.status(200).send(results);
+    }
+  });
+});
+
+router.put('/:id/episodes', function(req, res){
+  req.db.episodes.save(req.body, function(err, results){
+    if(err){
+      res.status(500).send(err);
+    } else {
+      // res.pub_date = new Date(res.pub_date);
+      res.status(200).send(results);
+    }
+  });
+});
+
 router.get('/:id/feed', function(req, res){
   req.db.feeds.findOne({customer_id:req.params.id}, function(err, results){
     if(err){

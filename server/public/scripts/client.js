@@ -82,6 +82,12 @@ angular.module('PodcastApp').factory('FeedService', ['$resource', function($reso
   });
 }]);
 
+angular.module('PodcastApp').factory('EpisodeService', ['$resource', function($resource){
+  return $resource('/podcast/:id/episodes', {
+    id: '@customer_id'
+  });
+}]);
+
 angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', function($http, $location, $state){
   var user = {};
   var auth = false;
@@ -125,7 +131,7 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
   console.log('About controller loaded. ');
 }]);
 
-angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', 'FeedService', function($http, user, AuthCheckService, $state, FeedService){
+angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', 'FeedService', 'EpisodeService', function($http, user, AuthCheckService, $state, FeedService, EpisodeService){
   console.log('Home controller loaded. ');
   var hc = this;
   hc.auth = AuthCheckService.authCheck();
@@ -137,7 +143,15 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
   } else {
     console.log('hc.user:', hc.user);
     hc.feed = {categories: [], itunes_category: []};
+    hc.new_episode = {categories: []};
     hc.feed = FeedService.get({id:hc.user.id});
+    hc.episodes = EpisodeService.query({id:hc.user.id});
+
+    hc.addEpisode = function(episode){
+      EpisodeService.save({id: hc.user.id}, episode, function(resp){
+        console.log('save episode:', resp);
+      });
+    };
 
     hc.publishFeed = function(){
       $http.get('/podcast/' + hc.user.id + '/publish').then(function(resp){
@@ -161,6 +175,9 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
         case 2:
           hc.feed.itunes_category.push(category);
           break;
+        case 3:
+          hc.new_episode.categories.push(category);
+          break;
       }
       category = '';
     };
@@ -172,6 +189,9 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
           break;
         case 2:
           hc.feed.itunes_category.splice(i, 1);
+          break;
+        case 3:
+          hc.new_episode.categories.splice(i, 1);
           break;
       }
     };

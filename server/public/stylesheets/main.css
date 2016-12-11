@@ -143,7 +143,7 @@ a.pure-button-primary {
   width: 100%;
 }
 
-#feed-categories, #feed-itunes-category {
+#feed-categories, #feed-itunes-category, #episode-category {
   display: inline-block;
   width: 92%;
 }
@@ -196,4 +196,9 @@ a.pure-button-primary {
   background-color: #f05a66;
   color: #fff;
   border: solid 1px #fff;
+}
+
+.episode-container:hover {
+  color: #f05a66;
+  background-color: #fff;
 }
