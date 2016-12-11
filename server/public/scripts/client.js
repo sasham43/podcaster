@@ -142,10 +142,23 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     $state.go('login');
   } else {
     console.log('hc.user:', hc.user);
+    hc.show_new_episode = false;
     hc.feed = {categories: [], itunes_category: []};
     hc.new_episode = {categories: []};
     hc.feed = FeedService.get({id:hc.user.id});
     hc.episodes = EpisodeService.query({id:hc.user.id});
+
+    hc.expandEpisode = function(index){
+      if(hc.expanded_episode == index){
+        hc.expanded_episode = -1;
+      } else {
+        hc.expanded_episode = index;
+      }
+    };
+
+    hc.toggleNewEpisode = function(){
+      hc.show_new_episode = !hc.show_new_episode;
+    };
 
     hc.addEpisode = function(episode){
       EpisodeService.save({id: hc.user.id}, episode, function(resp){

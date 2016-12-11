@@ -68,7 +68,7 @@ input {
     text-align: center;
 }
 
-.splash, .login, .about {
+.splash, .login, .about, .episode-list-container {
   border: solid 3px #fff;
   border-radius: 5px;
   margin: 10% 15%;
@@ -198,7 +198,31 @@ a.pure-button-primary {
   border: solid 1px #fff;
 }
 
+.episode-container {
+  padding: 1.5vh;
+  cursor: pointer;
+}
+
 .episode-container:hover {
   color: #f05a66;
   background-color: #fff;
+}
+
+.expanded-episode {
+  border: solid 1px #fff;
+  border-radius: 5px;
+  
+}
+
+.add-episode-title {
+  display: inline-block;
+}
+
+.add-episode-button {
+  border: solid 1px #fff;
+  width: 25px;
+  height: 25px;
+  background-color: #f05a66;
+  border-radius: 15px;
+  margin-left: 15px;
 }
