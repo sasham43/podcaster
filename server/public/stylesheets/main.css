@@ -21,14 +21,18 @@ input {
 .pure-menu-heading {
   text-transform: lowercase;
   color: #fff;
+  margin: 10px;
+  border: solid 3px #fff;
+  border-radius: 5px;
 }
 
 .splash-menu {
   color: #fff;
   background-color: #f05a66;
   /*border-top: solid 3px #f05a66;*/
-  border-bottom: solid 3px #fff;
+  /*border-bottom: solid 3px #fff;*/
   padding-top: .5%;
+  height: 75px;
   /*padding-bottom: .5%;*/
 }
 
@@ -68,11 +72,22 @@ input {
     text-align: center;
 }
 
-.splash, .login, .about, .episode-list-container {
+.splash, .login, .about{
   border: solid 3px #fff;
   border-radius: 5px;
   margin: 10% 15%;
   padding: 10% 15%;
+  color: #fff;
+}
+
+.feed, .episode {
+  border: solid 3px #fff;
+  border-radius: 5px;
+  margin-top: 5%;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-bottom: 5%;
+  /*padding: 10% 15%;*/
   color: #fff;
 }
 
@@ -125,7 +140,10 @@ a.pure-button-primary {
 }
 
 .pure-menu-list {
-  margin-right: 10px;
+  /*margin-right: 10px;*/
+  border: solid 3px #fff;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .facebook-link:hover, .google-link:hover{
@@ -136,12 +154,19 @@ a.pure-button-primary {
 .feed-form {
   text-align:left;
   padding: 3vh 15vw;
+  /*padding: 10px;*/
   /*padding-bottom: 3vh;*/
+}
+
+.episode-list-container, .add-episode-container {
+  padding: 3vh 15vw;
 }
 
 .feed-form input {
   width: 100%;
 }
+
+
 
 #feed-categories, #feed-itunes-category, #episode-category {
   display: inline-block;
@@ -211,7 +236,7 @@ a.pure-button-primary {
 .expanded-episode {
   border: solid 1px #fff;
   border-radius: 5px;
-  
+
 }
 
 .add-episode-title {
