@@ -1,0 +1,88 @@
+<div class="page-container">
+  <div class="feed">
+    <form name="feed" class="pure-form pure-form-stacked feed-form" autocomplete="on">
+      <label for="title">Title</label>
+      <input type="text" name="title" placeholder="Title" ng-model="hc.feed.title"/>
+
+      <label for="description">Description</label>
+      <input type="text" name="description" placeholder="Description" ng-model="hc.feed.description"/>
+
+      <label for="generator">Generator</label>
+      <input type="text" name="generator" placeholder="Generator" ng-model="hc.feed.generator"/>
+
+      <label for="feed_url">Feed URL</label>
+      <input type="text" name="feed_url" placeholder="Feed URL" ng-model="hc.feed.feed_url"/>
+
+      <label for="site_url">Site URL</label>
+      <input type="text" name="site_url" placeholder="Site URL" ng-model="hc.feed.site_url"/>
+
+      <label for="image_url">Image URL</label>
+      <input type="text" name="image_url" placeholder="Image URL" ng-model="hc.feed.image_url"/>
+
+      <label for="docs">Docs</label>
+      <input type="text" name="docs" placeholder="Docs" ng-model="hc.feed.docs"/>
+
+      <label for="author">Author</label>
+      <input type="text" name="author" placeholder="Author" ng-model="hc.feed.author"/>
+
+      <label for="managing_editor">Managing Editor</label>
+      <input type="text" name="managing_editor" placeholder="Managing Editor" ng-model="hc.feed.managing_editor"/>
+
+      <label for="web_master">Web Master</label>
+      <input type="text" name="web_master" placeholder="Web Master" ng-model="hc.feed.web_master"/>
+
+      <label for="copyright">Copyright</label>
+      <input type="text" name="copyright" placeholder="Copyright" ng-model="hc.feed.copyright"/>
+
+      <label for="language">Language</label>
+      <input type="text" name="language" placeholder="Language" ng-model="hc.feed.language"/>
+
+      <div class="">
+        <label for="categories">Categories</label>
+        <input type="text" name="categories" id="feed-categories" placeholder="Categories" ng-model="hc.category"/>
+        <button ng-click="hc.addCategory(1, hc.category)" class="pure-button add-button" type="button">+</button>
+      </div>
+      <div class="categories-container">
+        <div class="categories-pod" ng-repeat="cat in hc.feed.categories track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(1, $index)">x</button></div>
+      </div>
+
+      <label for="pub_date">Publication Date</label>
+      <input type="date" name="pub_date" placeholder="Pub Date" ng-model="hc.feed.pub_date"/>
+
+      <label for="ttl">TTL</label>
+      <input type="number" name="ttl" ng-model="hc.feed.ttl" placeholder="TTL"/>
+
+      <label for="itunes_author">iTunes Author</label>
+      <input type="text" name="itunes_author" placeholder="iTunes Author" ng-model="hc.feed.itunes_author"/>
+
+      <label for="itunes_subtitle">iTunes Subtitle</label>
+      <input type="text" name="itunes_subtitle" placeholder="iTunes Subtitle" ng-model="hc.feed.itunes_subtitle"/>
+
+      <label for="itunes_summary">iTunes Summary</label>
+      <input type="text" name="itunes_summary" placeholder="iTunes Summary" ng-model="hc.feed.itunes_summary"/>
+
+      <label for="itunes_owner">iTunes Owner</label>
+      <input type="text" name="itunes_owner" placeholder="iTunes Owner" ng-model="hc.feed.itunes_owner"/>
+
+      <label for="itunes_explicit">iTunes Explicit</label>
+      <input type="checkbox" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
+
+      <label for="itunes_category">iTunes Category</label>
+      <input type="text" name="itunes_category" id="feed-itunes-category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
+      <button ng-click="hc.addCategory(2, hc.itunes_category)" ng-submit="hc.addCategory(2, hc.itunes_category, $event)"  class="pure-button add-button" type="button">+</button>
+      <div class="categories-container">
+        <div class="categories-pod" ng-repeat="cat in hc.feed.itunes_category track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(2, $index)">x</button></div>
+      </div>
+
+      <label for="itunes_image">iTunes Image</label>
+      <input type="text" name="itunes_image" placeholder="iTunes Image" ng-model="hc.feed.itunes_image"/>
+
+      <div class="save-container">
+          <button ng-click="hc.saveFeed()" type="button" class="pure-button save-button">Save Details</button>
+          <button ng-click="hc.publishFeed()" type="button" class="pure-button save-button">Publish Feed</button>
+      </div>
+
+    </form>
+  </div>
+  
+</div>

@@ -34,16 +34,24 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     }}
   })
   .state({
-    name: 'home.feed',
+    name: 'feed',
     url: '/feed',
-    templateUrl: 'views/home-feed.html',
-    parent: 'home'
+    templateUrl: 'views/feed.html',
+    controller: 'HomeController',
+    controllerAs: 'hc',
+    resolve: {user: function(AuthCheckService){
+      return AuthCheckService.resolveUser();
+    }}
   })
   .state({
-    name: 'home.episodes',
+    name: 'episodes',
     url: '/episodes',
-    templateUrl: 'views/home-episodes.html',
-    parent: 'home'
+    templateUrl: 'views/episodes.html',
+    controller: 'HomeController',
+    controllerAs: 'hc',
+    resolve: {user: function(AuthCheckService){
+      return AuthCheckService.resolveUser();
+    }}
   })
   .state({
     name: 'user',
@@ -157,6 +165,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     };
 
     hc.toggleNewEpisode = function(){
+      // console.log('toggle:', hc.episodes, hc.show_new_episode)
       hc.show_new_episode = !hc.show_new_episode;
     };
 

@@ -1,0 +1,47 @@
+<div class="page-container">
+  <div class="episode">
+    <h3 class="add-episode-title">Episodes</h3><button type="button" class="add-episode-button" ng-click="hc.toggleNewEpisode()"><span ng-show="!hc.show_new_episode">+</span><span ng-show="hc.show_new_episode">-</span></button>
+    <div ng-show="hc.show_new_episode" class="add-episode-container">
+      <!-- <h4 class="add-episode-title">Add Episode</h4> -->
+      <form  class="pure-form pure-form-stacked add-episode-form">
+
+        <label for="title">Title</label>
+        <input type="text" name="title" ng-model="hc.new_episode.title" />
+
+        <label for="description">Description</label>
+        <input type="text" name="description" ng-model="hc.new_episode.description" />
+
+        <label for="category">Categories</label>
+        <input type="text" id="episode-category" name="category" ng-model="hc.new_episode_category" />
+        <button ng-click="hc.addCategory(3, hc.new_episode_category)" class="pure-button add-button" type="button">+</button>
+        <div class="categories-container">
+          <div class="categories-pod" ng-repeat="cat in hc.new_episode.categories track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(3, $index)">x</button></div>
+        </div>
+
+        <label for="author">Author</label>
+        <input type="text" name="author" ng-model="hc.new_episode.author" />
+
+        <label for="date">Date</label>
+        <input type="date" name="date" ng-model="hc.new_episode.date" />
+
+        <div class="save-container">
+          <button type="submit" class="pure-button save-button" ng-click="hc.addEpisode(hc.new_episode)" ng-submit="hc.addEpisode(hc.new_episode)">Save Episode</button>
+        </div>
+
+        <!-- upload mp3 stuff here -->
+      </form>
+    </div>
+    <div class="episode-list-container">
+
+      <div class="episode-container" ng-repeat="ep in hc.episodes"  ng-click="hc.expandEpisode($index)" ng-class="{'expanded-episode': hc.expanded_episode==$index}" >
+      <div class="episode-small">
+         <span class="episode-index">{{ $index + 1 }}.</span> <span class="episode-title">{{ ep.title }}</span>
+      </div>
+        <div class="episode-details" ng-show="hc.expanded_episode == $index">
+          {{ ep }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -24,7 +24,7 @@ dbconn('podcaster').then(function(db_conn){
     callbackURL: process.env.GOOGLE_CALLBACK
   }, function(accessToken, refreshToken, profile, cb){
     db.customers.findOne({google_id: profile.id}, function(err, results){
-      console.log('customers:', err, results, profile);
+      // console.log('customers:', err, results, profile);
       // if(results == null){
       //   db.customers.insert({google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, results){
       //     if(err){
@@ -43,7 +43,7 @@ dbconn('podcaster').then(function(db_conn){
            console.log(err);
            cb(err)
          } else {
-           console.log('saved user:', user);
+          //  console.log('saved user:', user);
            cb(null, user);
          }
       })
@@ -74,7 +74,7 @@ passport.deserializeUser(function(id, cb) {
       console.log('err');
       cb(err);
     } else {
-      console.log('user deserialized.', results);
+      // console.log('user deserialized.', results);
       cb(null, {id:id, authenticated: true, first_name: results.first_name, last_name: results.last_name, google_photo: results.google_photo});
     }
   });

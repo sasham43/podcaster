@@ -158,6 +158,15 @@ a.pure-button-primary {
   /*padding-bottom: 3vh;*/
 }
 
+.add-episode-form {
+  text-align: left;
+  padding: 10px;
+}
+
+.add-episode-form input {
+  width: 100%;
+}
+
 .episode-list-container, .add-episode-container {
   padding: 3vh 15vw;
 }
