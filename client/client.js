@@ -140,7 +140,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
     hc.feed = FeedService.get({id:hc.user.id});
 
     hc.publishFeed = function(){
-      $http.get('/podcast/' + hc.user.id + '/publish', function(resp){
+      $http.get('/podcast/' + hc.user.id + '/publish').then(function(resp){
         console.log('published:', resp);
       }, function(err){
         console.log('err published:', err);

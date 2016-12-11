@@ -62,13 +62,19 @@ router.get('/:id/publish', function(req, res){
       res.status(500).send(err);
     } else {
       // console.log('create podcast:', results);
-      var pub = createPodcast(results);
-      res.status(200).send(pub);
+      createPodcast(results, function(pub){
+        console.log('pub:', pub);
+        if(pub){
+          res.status(200).send(pub);
+        } else {
+          res.status(500).send(pub);
+        }
+      });
     }
   });
 });
 
-function createPodcast(options){
+function createPodcast(options, cb){
   options.pubDate = options.pub_date;
   options.managingEditor = options.managing_editor;
   options.webMaster = options.web_master;
@@ -77,10 +83,15 @@ function createPodcast(options){
   var xml = feed.xml();
   console.log('feed:', feed);
   var title = feed.title.replace(' ', '_');
-  var filename = title + '.xml';
-  fs.writeFile(filename, xml, function(resp){
-    console.log('xml created');
-    return 'published.';
+  var filename = 'server/public/feeds/' + title + '.xml';
+  fs.writeFile(filename, xml, function(err, resp){
+    if(err){
+      console.log('error publishing:', err);
+      cb(false);
+    } else {
+      console.log('published.');
+      cb(true);
+    }
   })
 }
 
