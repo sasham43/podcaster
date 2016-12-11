@@ -175,8 +175,6 @@ a.pure-button-primary {
   width: 100%;
 }
 
-
-
 #feed-categories, #feed-itunes-category, #episode-category {
   display: inline-block;
   width: 92%;
@@ -235,6 +233,7 @@ a.pure-button-primary {
 .episode-container {
   padding: 1.5vh;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .episode-container:hover {
@@ -248,8 +247,12 @@ a.pure-button-primary {
 
 }
 
-.add-episode-title {
+.episodes-title {
   display: inline-block;
+}
+
+.add-episode-title {
+  margin: 3px;
 }
 
 .add-episode-button {
@@ -259,4 +262,16 @@ a.pure-button-primary {
   background-color: #f05a66;
   border-radius: 15px;
   margin-left: 15px;
+}
+
+.episode-details {
+  margin-top: 10px;
+}
+
+.episode-details div {
+  margin-top: 5px;
+}
+
+.episode-description {
+  font-style: italic;
 }

@@ -1,8 +1,8 @@
 <div class="page-container">
   <div class="episode">
-    <h3 class="add-episode-title">Episodes</h3><button type="button" class="add-episode-button" ng-click="hc.toggleNewEpisode()"><span ng-show="!hc.show_new_episode">+</span><span ng-show="hc.show_new_episode">-</span></button>
+    <h3 class="episodes-title">Episodes</h3><button type="button" class="add-episode-button" ng-click="hc.toggleNewEpisode()"><span ng-show="!hc.show_new_episode">+</span><span ng-show="hc.show_new_episode">-</span></button>
     <div ng-show="hc.show_new_episode" class="add-episode-container">
-      <!-- <h4 class="add-episode-title">Add Episode</h4> -->
+      <h4 class="add-episode-title">New Episode</h4>
       <form  class="pure-form pure-form-stacked add-episode-form">
 
         <label for="title">Title</label>
@@ -31,14 +31,19 @@
         <!-- upload mp3 stuff here -->
       </form>
     </div>
-    <div class="episode-list-container">
+    <div class="episode-list-container" ng-show="!hc.show_new_episode">
 
       <div class="episode-container" ng-repeat="ep in hc.episodes"  ng-click="hc.expandEpisode($index)" ng-class="{'expanded-episode': hc.expanded_episode==$index}" >
       <div class="episode-small">
          <span class="episode-index">{{ $index + 1 }}.</span> <span class="episode-title">{{ ep.title }}</span>
       </div>
         <div class="episode-details" ng-show="hc.expanded_episode == $index">
-          {{ ep }}
+          <div class="episode-description">
+            {{ ep.description }}
+          </div>
+          <div class="episode-date">
+            {{ ep.date | date: 'MMM d, yyyy' }}
+          </div>
         </div>
       </div>
     </div>
