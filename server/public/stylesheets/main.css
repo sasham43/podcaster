@@ -4,6 +4,7 @@
 
 body {
   height: 100vh;
+    background-color: #f05a66;
 }
 
 a {
@@ -66,7 +67,7 @@ input {
     height: 100vh;
     background-color: #f05a66;
     z-index: 1;
-    overflow: hidden;
+    /*overflow: hidden;*/
     width: 100vw;
     height: 100vh;
     text-align: center;

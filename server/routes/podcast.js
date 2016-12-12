@@ -95,7 +95,7 @@ router.get('/:id/publish', function(req, res){
       res.status(500).send(err);
     } else {
       // console.log('create podcast:', results);
-      createPodcast(results, function(pub){
+      createPodcast(results, req, function(pub){
         console.log('pub:', pub);
         if(pub){
           res.status(200).send(pub);
@@ -107,25 +107,39 @@ router.get('/:id/publish', function(req, res){
   });
 });
 
-function createPodcast(options, cb){
+function createPodcast(options, req, cb){
   options.pubDate = options.pub_date;
   options.managingEditor = options.managing_editor;
   options.webMaster = options.web_master;
 
   var feed = new Podcast(options);
-  var xml = feed.xml();
-  console.log('feed:', feed);
-  var title = feed.title.replace(' ', '_');
-  var filename = 'server/public/feeds/' + title + '.xml';
-  fs.writeFile(filename, xml, function(err, resp){
+
+  // get and add episodes
+  req.db.episodes.find({customer_id: options.customer_id}, function(err, results){
     if(err){
-      console.log('error publishing:', err);
       cb(false);
     } else {
-      console.log('published.');
-      cb(true);
+      // console.log('episode results:', results);
+      results.map(function(episode){
+        // console.log('episode:', episode);
+        feed.item(episode);
+      });
+
+      var xml = feed.xml('\t');
+      console.log('feed:', feed);
+      var title = feed.title.replace(' ', '_');
+      var filename = 'server/public/feeds/' + title + '.xml';
+      fs.writeFile(filename, xml, function(err, resp){
+        if(err){
+          console.log('error publishing:', err);
+          cb(false);
+        } else {
+          console.log('published.');
+          cb(true);
+        }
+      });
     }
-  })
+  });
 }
 
 module.exports = router;
