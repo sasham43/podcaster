@@ -14,7 +14,8 @@ var dbconn = require('./db/db');
 
 var db;
 
-var db_url = process.env.DATABASE_URL || 'podcaster';
+// var db_url = process.env.DATABASE_URL || 'podcaster';
+var db_url = 'podcaster';
 
 dbconn(db_url).then(function(db_conn){
   console.log('db connected.');

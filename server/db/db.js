@@ -1,7 +1,7 @@
 var Massive = require('massive');
 var q = require('q');
 
-var connectionString = process.env.DB_URL || 'podcaster';
+var connectionString = process.env.DATABASE_URL || 'podcaster';
 
 var connections;
 var dbconn;
