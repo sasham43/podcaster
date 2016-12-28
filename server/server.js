@@ -93,14 +93,14 @@ app.get('*', function(req, res, next){
 });
 
 
-app.get(/^\/#!\/(?:user|feed|episode)/, function(req, res, next){
+app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
     console.log('server auth check.')
     if(req.user){
         console.log('authorized login attempt.');
         return next();
     } else {
         console.log('unauthorized login attempt.');
-        res.redirect('/#/login')
+        res.redirect('/login')
     }
 });
 

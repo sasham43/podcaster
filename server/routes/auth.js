@@ -8,7 +8,7 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
   function(req, res) {
     // Successful authentication, redirect home.
     console.log('google logged in.')
-    res.redirect('/#/home');
+    res.redirect('/feed');
   });
 
 router.get('/check', function(req, res, next){
@@ -22,7 +22,7 @@ router.get('/check', function(req, res, next){
 
 router.get('/logout', function(req, res, next){
   req.logout();
-  res.redirect('/#/');
+  res.redirect('/');
 });
 
 exports.router = router;
