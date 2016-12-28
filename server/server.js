@@ -88,7 +88,8 @@ passport.deserializeUser(function(id, cb) {
 });
 
 app.get('*', function(req, res, next){
-    console.log('all route:', req);
+    console.log('all route:', req.originalUrl);
+    next();
 });
 
 
