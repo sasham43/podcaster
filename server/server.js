@@ -86,37 +86,34 @@ passport.deserializeUser(function(id, cb) {
     }
   });
 });
-
-app.all('/*', function(req, res, next) {
-    console.log('all route:', req.originalUrl);
-    next();
-    // Just send the index.html for other files to support HTML5Mode
-    // res.sendFile('/public/views/index.html', { root: __dirname });
-});
-
-app.get('*', function(req, res, next){
-    console.log('all route:', req.originalUrl);
-    next();
-});
-
-
-<<<<<<< HEAD
-app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
-    console.log('server auth check.')
-    if(req.user){
-        console.log('authorized login attempt.');
-        return next();
-    } else {
-        console.log('unauthorized login attempt.');
-        res.redirect('/login')
-    }
-});
+// 
+// app.all('/*', function(req, res, next) {
+//     console.log('all route:', req.originalUrl);
+//     next();
+//     // Just send the index.html for other files to support HTML5Mode
+//     // res.sendFile('/public/views/index.html', { root: __dirname });
+// });
+//
+// app.get('*', function(req, res, next){
+//     console.log('all route:', req.originalUrl);
+//     next();
+// });
+//
+//
+// app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
+//     console.log('server auth check.')
+//     if(req.user){
+//         console.log('authorized login attempt.');
+//         return next();
+//     } else {
+//         console.log('unauthorized login attempt.');
+//         res.redirect('/login')
+//     }
+// });
 
 app.use('/', index);
 app.use('/podcast', podcast);
 app.use('/auth', auth.router);
-=======
->>>>>>> parent of 2ac51e7... remove auth Check from client
 
 app.listen(process.env.PORT || 3000, function(){
   console.log('server listening on port', 3000 + '...');
