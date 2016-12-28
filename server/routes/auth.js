@@ -8,7 +8,7 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
   function(req, res) {
     // Successful authentication, redirect home.
     console.log('google logged in.')
-    res.redirect('/#/feed');
+    res.redirect('/#/feed', {authenticated:true, user: req.user});
   });
 
 router.get('/check', function(req, res, next){
