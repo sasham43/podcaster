@@ -241,10 +241,11 @@ angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'A
 }]);
 
 angular.module('PodcastApp').controller('UserController', ['$http', 'AuthCheckService', '$state', 'user', '$scope', function($http, AuthCheckService, $state, user, $scope){
+    console.log('User controller loaded.');
   var uc = this;
-  // if(!AuthCheckService.authCheck()){
-  //   $state.go('login');
-  // }
+  if(!AuthCheckService.authCheck()){
+    $state.go('login');
+  }
   $scope.$emit('auth', {auth: true});
   console.log(user);
   uc.user = user.data.user;
