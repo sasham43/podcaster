@@ -130,9 +130,9 @@ angular.module('PodcastApp').controller('SplashController', ['$http', 'AuthCheck
 
 angular.module('PodcastApp').controller('LoginController', ['$http', 'AuthCheckService','$state', function($http, AuthCheckService, $state){
   console.log('Login controller loaded. ');
-  if(AuthCheckService.authCheck()){
-    $state.go('user');
-  }
+  // if(AuthCheckService.authCheck()){
+  //   $state.go('user');
+  // }
 }]);
 
 angular.module('PodcastApp').controller('AboutController', ['$http', function($http){
@@ -142,13 +142,13 @@ angular.module('PodcastApp').controller('AboutController', ['$http', function($h
 angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'AuthCheckService', '$state', 'FeedService', 'EpisodeService', function($http, user, AuthCheckService, $state, FeedService, EpisodeService){
   console.log('Home controller loaded. ');
   var hc = this;
-  hc.auth = AuthCheckService.authCheck();
+  // hc.auth = AuthCheckService.authCheck();
   hc.user = user.data.user;
   console.log('hc auth:', hc.auth);
-  if(hc.auth == null || hc.user == null){
-    console.log('go login');
-    $state.go('login');
-  } else {
+  // if(hc.auth == null || hc.user == null){
+  //   console.log('go login');
+  //   $state.go('login');
+  // } else {
     console.log('hc.user:', hc.user);
     hc.show_new_episode = false;
     hc.feed = {categories: [], itunes_category: []};
@@ -217,7 +217,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
           break;
       }
     };
-  }
+  // }
 }]);
 
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){

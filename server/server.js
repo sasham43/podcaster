@@ -92,6 +92,16 @@ app.use('/', index);
 app.use('/podcast', podcast);
 app.use('/auth', auth.router);
 
+app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
+    if(req.user){
+        console.log('authorized login attempt.');
+        return next();
+    } else {
+        console.log('unauthorized login attempt.');
+        res.redirect('/#/login')
+    }
+})
+
 
 app.listen(process.env.PORT || 3000, function(){
   console.log('server listening on port', 3000 + '...');
