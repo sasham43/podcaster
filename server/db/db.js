@@ -16,6 +16,7 @@ module.exports = dbconn = function(name){
       connectionString: connectionString
     }, function(err, db){
       if(err){
+          console.log('db connect error:', err);
         d.reject(err);
       } else {
         connections[name] = db;
@@ -26,7 +27,7 @@ module.exports = dbconn = function(name){
   return d.promise;
 }
 
-dbconn('podcaster').then(function(db){    
+dbconn('podcaster').then(function(db){
     db.create_customers(function(err, results){
       console.log('created customers table.', err, results);
     });
