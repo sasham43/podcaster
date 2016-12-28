@@ -225,7 +225,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
 }]);
 
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){
-  console.log('Nav controller loaded. ');
+  console.log('Root controller loaded. ');
   var rc = this;
   rc.auth = false;
 
@@ -241,9 +241,9 @@ angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'A
 
 angular.module('PodcastApp').controller('UserController', ['$http', 'AuthCheckService', '$state', 'user', '$scope', function($http, AuthCheckService, $state, user, $scope){
   var uc = this;
-  if(!AuthCheckService.authCheck()){
-    $state.go('login');
-  }
+  // if(!AuthCheckService.authCheck()){
+  //   $state.go('login');
+  // }
   $scope.$emit('auth', {auth: true});
   console.log(user);
   uc.user = user.data.user;
