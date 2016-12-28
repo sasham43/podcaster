@@ -68,7 +68,7 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     }}
   });
 
-  $urlRouterProvider.otherwise('/');
+  // $urlRouterProvider.otherwise('/');
   $provide.factory('DateInterceptor', ['$q', function($q){
     return {
       'response': function(resp){
