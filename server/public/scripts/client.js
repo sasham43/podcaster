@@ -135,9 +135,12 @@ angular.module('PodcastApp').controller('SplashController', ['$http', 'AuthCheck
 
 angular.module('PodcastApp').controller('LoginController', ['$http', 'AuthCheckService','$state', function($http, AuthCheckService, $state){
   console.log('Login controller loaded. ');
-  if(AuthCheckService.authCheck()){
-    $state.go('user');
-  }
+    if(AuthCheckService.authCheck()){
+        console.log('no login go user')
+        $state.go('user');
+    } else {
+        console.log('no login stay here')
+    }
 }]);
 
 angular.module('PodcastApp').controller('AboutController', ['$http', function($http){
