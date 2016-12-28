@@ -100,6 +100,7 @@ app.get('*', function(req, res, next){
 });
 
 
+<<<<<<< HEAD
 app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
     console.log('server auth check.')
     if(req.user){
@@ -114,6 +115,8 @@ app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
 app.use('/', index);
 app.use('/podcast', podcast);
 app.use('/auth', auth.router);
+=======
+>>>>>>> parent of 2ac51e7... remove auth Check from client
 
 app.listen(process.env.PORT || 3000, function(){
   console.log('server listening on port', 3000 + '...');
