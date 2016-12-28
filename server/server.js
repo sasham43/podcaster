@@ -29,9 +29,9 @@ dbconn(db_url).then(function(db_conn){
     clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK
   }, function(accessToken, refreshToken, profile, cb){
-      console.log('profile:', profile);
+    //   console.log('profile:', profile);
     db.customers.findOne({google_id: profile.id}, function(err, results){
-        console.log('results:', results, err);
+        // console.log('results:', results, err);
 
         if(results == undefined){
             db.customers.insert({google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, user){
@@ -78,7 +78,7 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(id, cb) {
   db.customers.findOne({id:id}, function(err, results){
     if(err){
-      console.log('err');
+      console.log('err', err);
       cb(err);
     } else {
       // console.log('user deserialized.', results);
