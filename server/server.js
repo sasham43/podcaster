@@ -87,6 +87,11 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
+app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('index.html', { root: __dirname });
+});
+
 app.get('*', function(req, res, next){
     console.log('all route:', req.originalUrl);
     next();
