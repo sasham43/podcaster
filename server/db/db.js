@@ -28,6 +28,7 @@ module.exports = dbconn = function(name){
 }
 
 dbconn('podcaster').then(function(db){
+    // need to make this synchronous
     db.create_customers(function(err, results){
       console.log('created customers table.', err, results);
     });
