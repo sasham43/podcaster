@@ -154,10 +154,10 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
   hc.auth = AuthCheckService.authCheck();
   hc.user = user.data.user;
   console.log('hc auth:', hc.auth);
-  // if(hc.authenticated == null || hc.user == null){
-  //   console.log('go login');
-  //   $state.go('login');
-  // } else {
+  if(hc.user == null){
+    console.log('go login');
+    $state.go('login');
+  } else {
     console.log('hc.user:', hc.user);
     hc.show_new_episode = false;
     hc.feed = {categories: [], itunes_category: []};
@@ -226,7 +226,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
           break;
       }
     };
-  // }
+  }
 }]);
 
 angular.module('PodcastApp').controller('RootController', ['$http', '$state', 'AuthCheckService', '$scope', function($http, $state, AuthCheckService, $scope){
