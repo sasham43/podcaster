@@ -6,7 +6,7 @@ angular.module('PodcastApp').run(function($rootScope) {
   }); // no idea if this is working -> yes is working
 });
 
-angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide', function($stateProvider, $urlRouterProvider, $httpProvider, $provide){
+angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide', '$locationProvider', function($stateProvider, $urlRouterProvider, $httpProvider, $provide, $locationProvider){
   $stateProvider.state({
     name: 'splash',
     url: '/',
@@ -82,6 +82,7 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     }
   }])
   $httpProvider.interceptors.push('DateInterceptor');
+  $locationProvider.html5Mode(true);
 }]);
 
 angular.module('PodcastApp').factory('FeedService', ['$resource', function($resource){
