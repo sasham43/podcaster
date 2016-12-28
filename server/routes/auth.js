@@ -40,5 +40,7 @@ function isAuthenticated(req, res, next){
     return next();
   }
 
+  console.log('not authenticated go to /#/');
+
   res.redirect('/#/');
 }
