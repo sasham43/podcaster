@@ -30,7 +30,8 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     controllerAs: 'hc',
     templateUrl: 'views/home.html',
     resolve: {user: function(AuthCheckService){
-      return AuthCheckService.resolveUser();
+    //   return AuthCheckService.resolveUser();
+    return true;
     }}
   })
   .state({
@@ -40,7 +41,8 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     controller: 'HomeController',
     controllerAs: 'hc',
     resolve: {user: function(AuthCheckService){
-      return AuthCheckService.resolveUser();
+    //   return AuthCheckService.resolveUser();
+    return true;
     }}
   })
   .state({
@@ -50,7 +52,8 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     controller: 'HomeController',
     controllerAs: 'hc',
     resolve: {user: function(AuthCheckService){
-      return AuthCheckService.resolveUser();
+    //   return AuthCheckService.resolveUser();
+    return true;
     }}
   })
   .state({
@@ -60,7 +63,8 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     controllerAs: 'uc',
     templateUrl: 'views/user.html',
     resolve: {user: function(AuthCheckService){
-      return AuthCheckService.resolveUser();
+    //   return AuthCheckService.resolveUser();
+    return true;
     }}
   });
 

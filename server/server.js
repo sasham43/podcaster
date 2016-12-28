@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-console.log('GoogleStrategy:', GoogleStrategy);
+// console.log('GoogleStrategy:', GoogleStrategy);
 
 var index = require('./routes/index');
 var podcast = require('./routes/podcast');
