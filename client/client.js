@@ -82,7 +82,7 @@ angular.module('PodcastApp').config(['$stateProvider', '$urlRouterProvider', '$h
     }
   }])
   $httpProvider.interceptors.push('DateInterceptor');
-  $locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 }]);
 
 angular.module('PodcastApp').factory('FeedService', ['$resource', function($resource){
