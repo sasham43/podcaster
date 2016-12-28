@@ -101,7 +101,7 @@ angular.module('PodcastApp').factory('EpisodeService', ['$resource', function($r
   });
 }]);
 
-angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', function($http, $location, $state){
+angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', '$scope', function($http, $location, $state, $scope){
   var user = {};
   var auth = false;
 
