@@ -89,6 +89,7 @@ passport.deserializeUser(function(id, cb) {
 
 
 app.get(/^\/(?:user|feed|episode)/, function(req, res, next){
+    console.log('auth check.')
     if(req.user){
         console.log('authorized login attempt.');
         return next();
