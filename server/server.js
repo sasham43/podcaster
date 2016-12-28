@@ -33,15 +33,27 @@ dbconn(db_url).then(function(db_conn){
     db.customers.findOne({google_id: profile.id}, function(err, results){
         console.log('results:', results, err);
 
-      db.customers.save({id:results.id, google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, user){
-        if(err){
-           console.log(err);
-           cb(err)
-         } else {
-          //  console.log('saved user:', user);
-           cb(null, user);
-         }
-      })
+        if(results == undefined){
+            db.customers.insert({google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken},
+              if(err){
+                 console.log(err);
+                 cb(err)
+               } else {
+                //  console.log('saved user:', user);
+                 cb(null, user);
+               }
+           });
+        } else {
+            db.customers.save({id:results.id, google_id: profile.id, google_photo: profile.photos[0].value, first_name: profile.name.givenName, last_name: profile.name.familyName, google_token: accessToken, google_refresh: refreshToken}, function(err, user){
+              if(err){
+                 console.log(err);
+                 cb(err)
+               } else {
+                //  console.log('saved user:', user);
+                 cb(null, user);
+               }
+           });
+        }
     })
   }))
 })
