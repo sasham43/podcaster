@@ -12,6 +12,7 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
   });
 
 router.get('/check', function(req, res, next){
+    console.log('auth check:', req.user);
   if(req.user){
     res.send({authenticated: true, user: req.user});
   } else {
