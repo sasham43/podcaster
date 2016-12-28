@@ -150,7 +150,7 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
   hc.auth = AuthCheckService.authCheck();
   hc.user = user.data.user;
   console.log('hc auth:', hc.auth);
-  if(hc.auth == null || hc.user == null){
+  if(hc.authenticated == null || hc.user == null){
     console.log('go login');
     $state.go('login');
   } else {
