@@ -114,6 +114,7 @@ angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', 
       } else {
         $http.get('/auth/check')
         .then(function(resp){
+            console.log('resp check good?', resp);
           auth = resp.data.authenticated;
           return auth;
         }, function(err){
