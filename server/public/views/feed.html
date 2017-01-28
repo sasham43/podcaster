@@ -40,7 +40,7 @@
       <div class="">
         <label for="categories">Categories</label>
         <input type="text" name="categories" id="feed-categories" placeholder="Categories" ng-model="hc.category"/>
-        <button ng-click="hc.addCategory(1, hc.category)" class="pure-button add-button" type="button">+</button>
+        <button ng-click="hc.addCategory(1, hc.category); hc.category='';" class="pure-button add-button" type="button">+</button>
       </div>
       <div class="categories-container">
         <div class="categories-pod" ng-repeat="cat in hc.feed.categories track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(1, $index)">x</button></div>
@@ -71,7 +71,7 @@
 
       <label for="itunes_category">iTunes Category</label>
       <input type="text" name="itunes_category" id="feed-itunes-category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
-      <button ng-click="hc.addCategory(2, hc.itunes_category)" ng-submit="hc.addCategory(2, hc.itunes_category, $event)"  class="pure-button add-button" type="button">+</button>
+      <button ng-click="hc.addCategory(2, hc.itunes_category);hc.itunes_category='';" ng-submit="hc.addCategory(2, hc.itunes_category, $event)"  class="pure-button add-button" type="button">+</button>
       <div class="categories-container">
         <div class="categories-pod" ng-repeat="cat in hc.feed.itunes_category track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(2, $index)">x</button></div>
       </div>

@@ -13,7 +13,7 @@
 
         <label for="category">Categories</label>
         <input type="text" id="episode-category" name="category" ng-model="hc.new_episode_category" />
-        <button ng-click="hc.addCategory(3, hc.new_episode_category)" class="pure-button add-button" type="button">+</button>
+        <button ng-click="hc.addCategory(3, hc.new_episode_category);hc.new_episode_category='';" class="pure-button add-button" type="button">+</button>
         <div class="categories-container">
           <div class="categories-pod" ng-repeat="cat in hc.new_episode.categories track by $index">{{cat}}<button type="button" class="remove-category" ng-click="hc.removeCategory(3, $index)">x</button></div>
         </div>

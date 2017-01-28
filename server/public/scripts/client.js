@@ -115,9 +115,8 @@ angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', 
         $http.get('/auth/check')
         .then(function(resp){
             console.log('resp check good?', resp);
-
-            $rootScope.$emit('auth', {auth: true});
           auth = resp.data.authenticated;
+          $rootScope.$broadcast('auth', {auth: auth});
           return auth;
         }, function(err){
           console.log('auth check fail:', err);
