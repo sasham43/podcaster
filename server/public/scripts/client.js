@@ -203,15 +203,17 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
       switch(dest){
         case 1:
           hc.feed.categories.push(category);
+          hc.category = '';
           break;
         case 2:
           hc.feed.itunes_category.push(category);
+          hc.itunes_category = '';
           break;
         case 3:
           hc.new_episode.categories.push(category);
+          hc.new_episode_category = '';
           break;
       }
-      category = '';
     };
 
     hc.removeCategory = function(dest, i){
