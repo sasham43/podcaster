@@ -2,9 +2,13 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var Podcast = require('podcast');
+var Upload = require('s3-uploader');
+var multer = require('multer');
 var dbconn = require('../db/db');
 
 // similar function to attach user to req? from auth.user?
+
+var upload = multer({ dest: 'uploads/' });
 
 router.use(function(req, res, next){
   dbconn('podcaster').then(function(db){
@@ -27,6 +31,11 @@ router.use(function(req, res, next){
 //     }
 //   })
 // })
+
+router.post('/:id/upload', upload.single('episode'), function(req, res, next){
+  console.log('file upload:', req.file);
+  uploadToS3(req.file);
+});
 
 router.get('/:id/episodes', function(req, res){
   req.db.episodes.find({customer_id: req.params.id}, function(err, results){
@@ -138,6 +147,19 @@ function createPodcast(options, req, cb){
           cb(true);
         }
       });
+    }
+  });
+}
+
+function uploadToS3(episode){
+  var options = {};
+  var client = new Upload('podcaster-episodes', options);
+
+  client.upload(episode, function(err, versions, meta){
+    if(err){
+      console.log('error uploading to s3:', err);
+    } else {
+      console.log('uploaded to s3:', versions, meta);
     }
   });
 }

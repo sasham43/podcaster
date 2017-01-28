@@ -19,6 +19,25 @@ input {
   float: right;
 }
 
+/*.explicit-checkbox input {
+  opacity: 0.1;
+}
+
+.explicit-checkbox {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border: solid 8px #fff;
+  border-radius: 5px;
+}
+
+:checked ~ div {
+  background-color: #f05a66;
+  border: solid 8px #fff;
+  border-radius: 5px;
+  width:80px;
+}*/
+
 .pure-menu-heading {
   text-transform: lowercase;
   color: #fff;

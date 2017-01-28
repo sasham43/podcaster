@@ -24,6 +24,9 @@
         <label for="date">Date</label>
         <input type="date" name="date" ng-model="hc.new_episode.date" />
 
+        <label for="upload">Upload</label>
+        <input type="file" name="upload" accept="audio/*" formenctype="multipart/form-data"/><button class="pure-button">upload</button>
+
         <div class="save-container">
           <button type="submit" class="pure-button save-button" ng-click="hc.addEpisode(hc.new_episode)" ng-submit="hc.addEpisode(hc.new_episode)">Save Episode</button>
         </div>

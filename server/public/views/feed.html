@@ -64,8 +64,10 @@
       <label for="itunes_owner">iTunes Owner</label>
       <input type="text" name="itunes_owner" placeholder="iTunes Owner" ng-model="hc.feed.itunes_owner"/>
 
-      <label for="itunes_explicit">iTunes Explicit</label>
-      <input type="checkbox" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
+      <label for="i_explicit">iTunes Explicit</label>
+      <div for="itunes_explicit" class="explicit-checkbox">
+        <input id="itunes_explicit" type="checkbox" name="itunes_explicit" placeholder="iTunes Explicit" ng-model="hc.feed.itunes_explicit"/>
+      </div>
 
       <label for="itunes_category">iTunes Category</label>
       <input type="text" name="itunes_category" id="feed-itunes-category" placeholder="iTunes Category" ng-model="hc.itunes_category"/>
@@ -84,5 +86,5 @@
 
     </form>
   </div>
-  
+
 </div>
