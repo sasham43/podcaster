@@ -101,7 +101,7 @@ angular.module('PodcastApp').factory('EpisodeService', ['$resource', function($r
   });
 }]);
 
-angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', '$scope', function($http, $location, $state, $scope){
+angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', '$state', '$rootScope', function($http, $location, $state, $rootScope){
   var user = {};
   var auth = false;
 
@@ -116,7 +116,7 @@ angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', 
         .then(function(resp){
             console.log('resp check good?', resp);
 
-            $scope.$emit('auth', {auth: true});
+            $rootScope.$emit('auth', {auth: true});
           auth = resp.data.authenticated;
           return auth;
         }, function(err){

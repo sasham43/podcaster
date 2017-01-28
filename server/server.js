@@ -54,8 +54,9 @@ dbconn(db_url).then(function(db_conn){
                }
            });
         }
-    })
-  }))
+    });
+  }));
+
 })
 
 app.use(express.static('server/public'));
@@ -69,7 +70,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use('/', function(req, res, next){
+  console.log('req.user:', req.user);
+  next();
+});
 
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
@@ -81,7 +85,7 @@ passport.deserializeUser(function(id, cb) {
       console.log('err', err);
       cb(err);
     } else {
-      console.log('user deserialized.', results);
+      // console.log('user deserialized.', results);
       cb(null, {id:id, authenticated: true, first_name: results.first_name, last_name: results.last_name, google_photo: results.google_photo});
     }
   });
