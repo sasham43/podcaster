@@ -13,7 +13,7 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
     } else {
         res.data = {authenticated: true};
     }
-    res.redirect('/#/feed');
+    res.redirect('/#!/feed');
   });
 
 router.get('/check', function(req, res, next){
@@ -39,6 +39,8 @@ function isAuthenticated(req, res, next){
   if (req.user.authenticated){
     return next();
   }
+
+  console.log('not authenticated go to /#/');
 
   res.redirect('/#/');
 }
