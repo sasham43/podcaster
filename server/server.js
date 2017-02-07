@@ -60,7 +60,7 @@ dbconn(db_url).then(function(db_conn){
 })
 
 app.use(express.static('server/public'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '100mb'}));
 app.use(session({
   secret: 'teal walls',
   resave: true,
@@ -69,11 +69,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use('/', function(req, res, next){
-  console.log('req.user:', req.user);
-  next();
-});
 
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);

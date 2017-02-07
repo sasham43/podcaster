@@ -98,6 +98,33 @@ angular.module('PodcastApp').factory('FeedService', ['$resource', function($reso
 angular.module('PodcastApp').factory('EpisodeService', ['$resource', function($resource){
   return $resource('/podcast/:id/episodes', {
     id: '@customer_id'
+  }, {
+    upload: {
+      method: 'POST',
+      transformRequest: function(data) {
+        if (data === undefined)
+          return data;
+
+        var fd = new FormData();
+        angular.forEach(data, function(value, key) {
+          if (value instanceof FileList) {
+            if (value.length == 1) {
+              fd.append(key, value[0]);
+            } else {
+              angular.forEach(value, function(file, index) {
+                fd.append(key + '_' + index, file);
+              });
+            }
+          } else {
+            fd.append(key, value);
+          }
+        });
+
+        return fd;
+      },
+      params: {id: '@id'},
+      url: 'podcast/:id/upload'
+    }
   });
 }]);
 
@@ -129,6 +156,19 @@ angular.module('PodcastApp').factory('AuthCheckService', ['$http', '$location', 
     }
   }
 }]);
+
+angular.module('PodcastApp').directive('filesModel', function (){
+  return {
+    controller: function($parse, $element, $attrs, $scope){
+      var exp = $parse($attrs.filesModel);
+
+      $element.on('change', function(){
+        exp.assign($scope, this.files);
+        $scope.$apply();
+      });
+    }
+  };
+});
 
 angular.module('PodcastApp').controller('SplashController', ['$http', 'AuthCheckService', function($http, AuthCheckService){
   console.log('Splash controller loaded. ');
@@ -179,9 +219,17 @@ angular.module('PodcastApp').controller('HomeController', ['$http', 'user', 'Aut
       hc.show_new_episode = !hc.show_new_episode;
     };
 
+    hc.uploadEpisode = function(){
+      console.log('hc:', hc.new_episode_form);
+      EpisodeService.upload({id: hc.user.id, data: hc.upload, episode: hc.new_episode });
+    };
+
     hc.addEpisode = function(episode){
       EpisodeService.save({id: hc.user.id}, episode, function(resp){
         console.log('save episode:', resp);
+        hc.episodes = EpisodeService.query({id:hc.user.id});
+        hc.show_new_episode = false;
+
       });
     };
 
@@ -253,7 +301,7 @@ angular.module('PodcastApp').controller('UserController', ['$http', 'AuthCheckSe
   if(!AuthCheckService.authCheck()){
     $state.go('login');
   }
-  $scope.$emit('auth', {auth: true});
+  // $scope.$emit('auth', {auth: true});
   console.log(user);
   uc.user = user.data.user;
 }]);
